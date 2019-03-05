@@ -22,7 +22,7 @@ Treningsøkt
 
 Notat
 
-| <u>Økt-ID</u> | Formål | Opplevelse | Div |
+| <u>Økt-ID</u> | Formål | Opplevelse | Diverse |
 | --- | --- | ---- |
 
 Resultat
@@ -34,6 +34,11 @@ Resultat
 
 | <u>Øvelse-ID</u> | <u>Økt-ID</u> |
 |---|
+
+Logg
+
+| <u>Økt-ID</u> | <u> Øvelse-ID </u> | Sett | Repetisjoner | Kg |
+|--|
 
 Øvelse
 
@@ -52,15 +57,20 @@ Resultat
 
 Ikke_fastmontert_øvelse
 
-|<u>Øvelse-ID</u>|Beskrivesle|
+|  |  |
 |---|
 
 Fastmontert-øvelse
 
-|<u>Øvelse-ID</u>| Antall-kg | Antall_sett |
+| |   |
 |---|
 
 Apparat
 
 |<u>Apparat-ID</u>| Navn | Brukerinstruks |
 |--|
+
+Øvelse_apparat
+
+|<u>apparat_id</u> | <u>øvelse_id</u> |
+|---|
