@@ -2,9 +2,6 @@ package Applikasjon;
 
 import java.sql.*;
 import java.util.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 
 public class Main {
@@ -13,5 +10,17 @@ public class Main {
 //		test.password = "root";
 //		test.username = "root";
 		test.connect();
+		// printer alle tables i databasen
+		try {
+		Statement statement = test.conn.createStatement();
+		ResultSet rs = statement.executeQuery("SHOW tables");
+		
+		while(rs.next()) {
+			System.out.println(rs.getString(1));
+		}
+		test.conn.close();
+		} catch (SQLException e) {
+			System.out.println("SQLException " + e.getMessage());
+		}
 	}
 }
