@@ -7,28 +7,54 @@ import java.util.*;
 public class Main {
 
 	public static void main(String[] args) {
-		/*
-		Testapplikasjon test = new Testapplikasjon();
-		test.connect();
-		// printer alle tables i databasen
-		try {
-		Statement statement = test.conn.createStatement();
-		ResultSet rs = statement.executeQuery("SHOW tables");
-		System.out.println("Dette funker");
+		Dbcon connection = new Dbcon();
 		
-		while(rs.next()) {
-			System.out.println(rs.getString(1));
-		}
-		test.disconnect();
-		} catch (SQLException e) {
-			System.out.println("SQLException" + e.getMessage());
-		} 
-		
+		System.out.print("hei\n");
 		Apparat app1 = new Apparat(1);
-		app1.connect();
-		app1.initialize(conn);
-		app1.setNavn("Romaskin");
-		app1.setBrukerInstruks("Ro");
-		*/
+		connection.connect();
+		Connection connect = connection.getConnection();
+		
+		app1.initialize(connect);
+		System.out.println("ID: " + app1.getApparatId() +" Navn: "+ app1.getNavn() + " Brukerinstuks: " + app1.getBrukerInstruks());
+
+		try {
+			Statement statement = connect.createStatement();
+			ResultSet rs = statement.executeQuery("show tables");
+			while (rs.next()) {
+//				System.out.println(rs.getString(1));
+
+				//System.out.println(rs.getString(1));
+			}
+		} catch(SQLException e) {
+			System.out.println("feil igjen " +e.getMessage());
+		}
+	
+	
+		System.out.println("test av objektene mine");
+		System.out.println(app1.getApparatId());
+		System.out.println(app1.getNavn());
+		
+		Apparat app2 = new Apparat(2);
+		app2.setNavn("Mølle");
+		app2.setBrukerInstruks("LØP");
+		System.out.println("heihei - dette funker ikke");
+		System.out.println("heiheihei");
+		
+		
+		System.out.println("Printe alle forekomster i tabellen");
+		Apparat test = new Apparat(22);
+		try {
+			Statement statement = connect.createStatement();
+			ResultSet rs = statement.executeQuery("select * from apparat");
+			System.out.println("Dette funker");
+			while (rs.next()) {
+				System.out.println(rs.getString(1));
+			}
+			
+		} catch(SQLException e){
+			System.out.println(e.getMessage());
+		} finally {
+			connection.disconnect();
+		}
 	}
 }

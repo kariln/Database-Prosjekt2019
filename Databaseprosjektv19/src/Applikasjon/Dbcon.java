@@ -10,9 +10,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public abstract class Dbcon {
+public class Dbcon {
 	
-	Connection conn = null;
+	private Connection conn = null;
+	
+	public Connection getConnection() {
+		return this.conn;
+	}
 	
 	public void connect() {
 		try {
