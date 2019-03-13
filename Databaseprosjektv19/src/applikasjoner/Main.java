@@ -1,11 +1,14 @@
-package Applikasjon;
+package applikasjoner;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
+import modeller.Apparat;
+import modeller.Dbcon;
 
 public class Main {
-
 	public static void main(String[] args) {
 		Dbcon connection = new Dbcon();
 		
@@ -29,7 +32,6 @@ public class Main {
 			System.out.println("feil igjen " +e.getMessage());
 		}
 	
-	
 		System.out.println("test av objektene mine");
 		System.out.println(app1.getApparatId());
 		System.out.println(app1.getNavn());
@@ -39,8 +41,7 @@ public class Main {
 		app2.setBrukerInstruks("LØP");
 		System.out.println("heihei - dette funker ikke");
 		System.out.println("heiheihei");
-		
-		
+			
 		System.out.println("Printe alle forekomster i tabellen");
 		Apparat test = new Apparat(22);
 		try {

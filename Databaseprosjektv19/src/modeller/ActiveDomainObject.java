@@ -1,4 +1,4 @@
-package Applikasjon;
+package modeller;
 
 import java.sql.Connection;
 

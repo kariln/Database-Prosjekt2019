@@ -1,4 +1,4 @@
-package Applikasjon;
+package modeller;
 
 public class Testapplikasjon extends Dbcon {
 	private int tall;
