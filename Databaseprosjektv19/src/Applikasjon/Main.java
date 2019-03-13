@@ -7,8 +7,6 @@ import java.util.*;
 public class Main {
 	public static void main(String[] args) {
 		Testapplikasjon test = new Testapplikasjon();
-//		test.password = "root";
-//		test.username = "root";
 		test.connect();
 		// printer alle tables i databasen
 		try {
