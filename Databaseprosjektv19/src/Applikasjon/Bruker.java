@@ -22,10 +22,10 @@ public class Bruker implements ActiveDomainObject{
 	public void initialize(Connection conn) {
 		//TODO Auto-generated method stub
         try {
-		    String SQL = "select navn, epost, brukertype from Bruker where brukerid=?";
+		    String SQL = "select navn from Bruker where brukerid=?";
 		    PreparedStatement st = conn.prepareStatement(SQL);
 		    st.setInt(1, bruker_id);
-	            ResultSet rs = st.execute()
+	            ResultSet rs = st.executeQuery();
 	            while (rs.next()) {
 	                navn =  rs.getString("navn");
 	            }

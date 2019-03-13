@@ -7,6 +7,7 @@ import java.util.*;
 public class Main {
 
 	public static void main(String[] args) {
+		/*
 		Testapplikasjon test = new Testapplikasjon();
 		test.connect();
 		// printer alle tables i databasen
@@ -21,6 +22,13 @@ public class Main {
 		test.disconnect();
 		} catch (SQLException e) {
 			System.out.println("SQLException" + e.getMessage());
-		}
+		} 
+		
+		Apparat app1 = new Apparat(1);
+		app1.connect();
+		app1.initialize(conn);
+		app1.setNavn("Romaskin");
+		app1.setBrukerInstruks("Ro");
+		*/
 	}
 }
