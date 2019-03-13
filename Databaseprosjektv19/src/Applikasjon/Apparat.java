@@ -65,10 +65,23 @@ public class Apparat extends Dbcon implements ActiveDomainObject {
 			st.setString(1, this.navn);
 			st.setString(2, this.brukerinstruks);
 			st.setInt(3, this.apparat_id);
-			st.executeUpdate();
+			st.execute();
 		} catch (SQLException e) { 
 			System.out.println("db error during update of apparat: " + e.getMessage());
 		}		
+	}
+	
+	public void add(Connection conn) {
+		try {
+			String SQL = "insert into apparat (apparat_id, navn, brukerinstruks) values (?,?,?)";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setInt(1,this.apparat_id);
+			st.setString(2, this.navn);
+			st.setString(3, this.brukerinstruks);
+			st.execute();
+		} catch (SQLException e) {
+			System.out.println("db error during insertion to apparat: " + e.getMessage());
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -83,6 +96,8 @@ public class Apparat extends Dbcon implements ActiveDomainObject {
 			Statement statement = app1.conn.createStatement();
 			ResultSet rs = statement.executeQuery("show tables");
 			while (rs.next()) {
+//				System.out.println(rs.getString(1));
+
 				//System.out.println(rs.getString(1));
 			}
 		} catch(SQLException e) {
@@ -100,7 +115,7 @@ public class Apparat extends Dbcon implements ActiveDomainObject {
 		app2.setNavn("Mølle");
 		app2.setBrukerInstruks("LØP");
 		System.out.println("heihei - dette funker ikke");
-		app2.save(app2.conn);
+		app2.add(app2.conn);
 		System.out.println("heiheihei");
 		app2.disconnect();
 		
