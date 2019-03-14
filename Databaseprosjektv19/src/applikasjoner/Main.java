@@ -20,17 +20,6 @@ public class Main {
 		app1.initialize(connect);
 		System.out.println("ID: " + app1.getApparatId() +" Navn: "+ app1.getNavn() + " Brukerinstuks: " + app1.getBrukerInstruks());
 
-		try {
-			Statement statement = connect.createStatement();
-			ResultSet rs = statement.executeQuery("show tables");
-			while (rs.next()) {
-//				System.out.println(rs.getString(1));
-
-//				System.out.println(rs.getString(1));
-			}
-		} catch(SQLException e) {
-			System.out.println("feil igjen " +e.getMessage());
-		}
 	
 		System.out.println("test av objektene mine");
 		System.out.println(app1.getApparatId());
