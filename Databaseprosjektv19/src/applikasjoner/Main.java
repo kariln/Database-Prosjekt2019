@@ -26,7 +26,7 @@ public class Main {
 			while (rs.next()) {
 //				System.out.println(rs.getString(1));
 
-				//System.out.println(rs.getString(1));
+//				System.out.println(rs.getString(1));
 			}
 		} catch(SQLException e) {
 			System.out.println("feil igjen " +e.getMessage());
@@ -39,9 +39,6 @@ public class Main {
 		Apparat app2 = new Apparat(2);
 		app2.setNavn("Mølle");
 		app2.setBrukerInstruks("LØP");
-		System.out.println("heihei - dette funker ikke");
-		System.out.println("heiheihei");
-			
 		System.out.println("Printe alle forekomster i tabellen");
 		Apparat test = new Apparat(22);
 		try {
