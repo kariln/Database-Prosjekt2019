@@ -1,16 +1,20 @@
 package modeller;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Notat implements ActiveDomainObject{
 	private int id;
-//	private int fk_økt;
 	private String formål;
 	private int opplevelse;
 	private String diverse;
+	private Treningsøkt treningsøkt;
 	
-	public Notat(int pk) {
-		this.id = pk;
+	public Notat(Treningsøkt treningsøkt) {
+		this.treningsøkt = treningsøkt;
+		this.id = treningsøkt.getØkt_id();
 	}
 	
 	public int getId() {
@@ -28,7 +32,7 @@ public class Notat implements ActiveDomainObject{
 		return this.opplevelse;
 	}
 	public void setOpplevelse(int opplevelse) {
-		if (opplevelse>10 || opplevelse<1) {
+		if (opplevelse>9 || opplevelse<1) {
 			throw new IllegalArgumentException("Må være et tall mellom 1-10");
 		}else {
 			this.opplevelse = opplevelse;
@@ -42,27 +46,52 @@ public class Notat implements ActiveDomainObject{
 		this.diverse = diverse;
 	}
 	
-	
 	//henter data i tabellen, oppdaterer objektet
 	@Override
 	public void initialize(Connection conn) {
-		// TODO Auto-generated method stub
+		try {
+			String SQL = "select formål, opplevelse, diverse from notat where økt_id=?";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setInt(1, this.id);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				this.formål = rs.getString("formål");
+				this.opplevelse = rs.getInt("opplevelse");
+				this.diverse = rs.getString("diverse");
+			}
+		} catch (SQLException e) {
+			System.out.println("db error during select of notat: " + e.getMessage());
+		}
 		
 	}
 	//refresher data fra tabellen
 	@Override
 	public void refresh(Connection conn) {
-		// TODO Auto-generated method stub
-		
+		initialize(conn);
 	}
 	//lagrer nåværende element i tabellen
 	@Override
 	public void save(Connection conn) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String SQL = "update save set formål=?, opplevelse=?, diverse=? where økt_id=?";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setString(1, this.formål);
+			st.setInt(2, this.opplevelse);
+			st.setString(3, this.diverse);
+		} catch (SQLException e) {
+			System.out.println("db error during update of notat: " + e.getMessage());
+		}
 	}
 	//legger til en ny instans av objektet i tabellen
 	public void add(Connection conn) {
-		
+		try {
+			String SQL = "insert into notat (formål, opplevelse, diverse) values (?,?,?)";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setString(1, this.formål);
+			st.setInt(2, this.opplevelse);
+			st.setString(3, this.diverse);
+		} catch (SQLException e) {
+			System.out.println("db error during insertion to notat: " + e.getMessage());
+		}
 	}
 }
