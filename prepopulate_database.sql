@@ -15,9 +15,9 @@ INSERT INTO notat VALUES (2, 'Pumpe for SK19', 3, 'Sykt smuud dag');
 
 INSERT INTO resultat VALUES (3, 6, 8);
 
-INSERT INTO øvelse VALUES (1, "Armhevninger", FALSE);
-INSERT INTO øvelse VALUES (2, "Ro", TRUE);
-INSERT INTO øvelse VALUES (3, "Nedtrekk", TRUE);
+INSERT INTO øvelse VALUES (1, "Armhevninger", "trøkk", FALSE);
+INSERT INTO øvelse VALUES (2, "Ro", "Napp", TRUE);
+INSERT INTO øvelse VALUES (3, "Nedtrekk", "Dra", TRUE);
 
 INSERT INTO økt_øvelse VALUES (2, 2, "Rodde sykt bra i dag");
 
