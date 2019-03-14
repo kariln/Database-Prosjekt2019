@@ -7,6 +7,7 @@ CREATE TABLE bruker (
     PRIMARY KEY (bruker_id)
 );
 
+
 -- Treningsøkt
 CREATE TABLE treningsøkt (
     økt_id INT UNSIGNED NOT NULL,
@@ -14,6 +15,7 @@ CREATE TABLE treningsøkt (
     varighet INT UNSIGNED,
     PRIMARY KEY (økt_id)
 );
+
 
 -- Bruker_økt
 CREATE TABLE bruker_økt (
@@ -26,6 +28,7 @@ CREATE TABLE bruker_økt (
 		ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
 
 -- Notat
 CREATE TABLE notat (
@@ -53,6 +56,7 @@ CREATE TABLE resultat (
 -- Øvelse
 CREATE TABLE øvelse (
     øvelse_id INT UNSIGNED NOT NULL,
+    navn VARCHAR(32),
     beskrivelse TEXT,
     fastmonter BOOLEAN,
     PRIMARY KEY (øvelse_id)

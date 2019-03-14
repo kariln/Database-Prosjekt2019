@@ -1,16 +1,26 @@
 package modeller;
 
-public class Øvelse {
+import java.sql.*;
+
+public class Øvelse implements ActiveDomainObject {
 	
 	private int øvelse_id;
 	private String navn;
+	private String beskrivelse;
+	private boolean fastmontert;
 	
-	public Øvelse(int id, String navn) {
+	// Konstruktør
+	public Øvelse(int id) {
 		this.øvelse_id = id;
-		this.navn = navn;
 	}
 	
-
+	public Øvelse(int id, String navn, String beskrivelse, boolean fastmontert) {
+		this.øvelse_id = id;
+		this.navn = navn;
+		this.beskrivelse = beskrivelse;
+		this.fastmontert = fastmontert;
+	}
+	// Get
 	public int getØvelse_id() {
 		return this.øvelse_id;
 	}
@@ -19,7 +29,90 @@ public class Øvelse {
 		return this.navn;
 	}
 	
+	public String getBeskrivelse() {
+		return this.beskrivelse;
+	}
+	
+	public boolean getFastmontert() {
+		return this.fastmontert;
+	}
+	
+	// Set
 	public void setNavn(String navn) {
 		this.navn = navn;
 	}
+	
+	public void setBeskrivelse(String beskrivelse) {
+		this.beskrivelse = beskrivelse;
+	}
+	public void setFastmontert(boolean value) {
+		this.fastmontert = value;
+	}
+	
+	// Databasebehandlingsfunksjoner
+	@Override
+	public void initialize(Connection conn) {
+		// bruker prepared statements, les om det på tutorialspoint
+		try {
+			String SQL = "select øvelse_id, navn, beskrivelse, fastmonter from øvelse where øvelse_id=?";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			// fyller inn for ?
+// HVA ER DETTE???
+			st.setInt(1, this.øvelse_id);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				this.navn = rs.getString("navn");
+				this.beskrivelse = rs.getString("beskrivelse");
+				this.fastmontert = rs.getBoolean("fastmontert");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("db error during select of øvelse: "+e.getMessage());	
+		}
+	}
+	
+	@Override
+	public void refresh(Connection conn) {
+		initialize(conn);
+	}
+	@Override
+	public void save(Connection conn) {
+		try {
+			String SQL = "update øvelse set navn=?, where øving_id=?";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setString(1, this.navn);
+			st.setString(2, this.beskrivelse);
+			st.setBoolean(3, this.fastmontert);
+			st.execute();
+			
+		} catch (SQLException e) {
+			System.out.println("db error during update of øvelse: " + e.getMessage() );
+			
+		}
+	}
+	public void add(Connection conn) {
+		try {
+			String SQL = "insert into øvelse (øvelse_id, navn, beskrivelse, fastmontert) values (?,?,?,?)";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setInt(1, this.øvelse_id);
+			st.setString(2, this.navn);
+			st.setString(3, this.beskrivelse);
+			st.setBoolean(4, fastmontert);
+			st.execute();
+			
+		} catch (SQLException e) {
+			System.out.println("db eror during insertion to øvelse: " + e.getMessage());
+		}
+	}
 }
+
+
+//-- Øvelse
+//CREATE TABLE øvelse (
+//    øvelse_id INT UNSIGNED NOT NULL,
+//    navn VARCHAR(32),
+//    beskrivelse TEXT,
+//    fastmonter BOOLEAN,
+//    PRIMARY KEY (øvelse_id)
+//);
+
