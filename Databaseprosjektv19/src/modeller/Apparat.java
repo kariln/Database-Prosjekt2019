@@ -41,6 +41,7 @@ public class Apparat implements ActiveDomainObject {
 		    //fyller inn for ? 
 		    st.setInt(1, this.apparat_id);
             ResultSet rs = st.executeQuery();
+            System.out.println(rs); // ??????
             while (rs.next()) {
                 this.navn =  rs.getString("navn");
                 this.brukerinstruks = rs.getString("brukerinstruks");
