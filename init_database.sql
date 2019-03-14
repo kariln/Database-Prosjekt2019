@@ -1,11 +1,12 @@
 
-
+/*
 -- Bruker
 CREATE TABLE bruker (
     bruker_id INT UNSIGNED NOT NULL,
     navn VARCHAR(64) NOT NULL,
     PRIMARY KEY (bruker_id)
 );
+*/
 
 -- Treningsøkt
 CREATE TABLE treningsøkt (
@@ -15,6 +16,7 @@ CREATE TABLE treningsøkt (
     PRIMARY KEY (økt_id)
 );
 
+/*
 -- Bruker_økt
 CREATE TABLE bruker_økt (
     bruker_id INT UNSIGNED NOT NULL,
@@ -26,6 +28,7 @@ CREATE TABLE bruker_økt (
 		ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+*/
 
 -- Notat
 CREATE TABLE notat (
@@ -113,7 +116,7 @@ CREATE TABLE øvelse_gruppe (
 CREATE TABLE apparat (
     apparat_id INT UNSIGNED NOT NULL,
     navn VARCHAR(64) NOT NULL,
-    brukerinstruks TEXT,
+apparatapparat    brukerinstruks TEXT,
     PRIMARY KEY (apparat_id)
 );
 
