@@ -206,3 +206,5 @@ local.properties
 .classpath
 
 .idea/
+
+Databaseprosjektv19/src/modeller/Dbcon.java
