@@ -38,6 +38,7 @@ public class Notat implements ActiveDomainObject{
 			this.opplevelse = opplevelse;
 		}
 	}
+	// dette er definert i databasen, så ma vil ikke få inn tall som ikke er mellom 1-10
 	
 	public String getDiverse() {
 		return this.diverse;
