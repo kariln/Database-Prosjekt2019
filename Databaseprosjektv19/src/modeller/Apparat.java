@@ -1,6 +1,8 @@
 package modeller;
 
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Apparat implements ActiveDomainObject {
 	private int apparat_id;
@@ -10,6 +12,12 @@ public class Apparat implements ActiveDomainObject {
 	//konstruktør - gjør at det ikke er mulig å opprette et apparat uten en id
 	public Apparat(int apparat_id) {
 		this.apparat_id = apparat_id;
+	}
+	
+	public Apparat(int apparat_id, String navn, String brukerinstruks) {
+		this.apparat_id = apparat_id;
+		this.navn = navn;
+		this.brukerinstruks = brukerinstruks;
 	}
 	
 	//gettere og settere
@@ -83,5 +91,31 @@ public class Apparat implements ActiveDomainObject {
 		} catch (SQLException e) {
 			System.out.println("db error during insertion to apparat: " + e.getMessage());
 		}
+	}
+	
+	public String toString() {
+		return "Apparat: " + this.apparat_id + ", navn: " + this.navn + ", funksjonsbeskrivelse: " + this.brukerinstruks;
+	}
+	
+	public static List<Apparat> listApparater(Connection conn){
+		try {
+			String SQL = "Select * from øvelse;";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			ResultSet rs = st.executeQuery();
+			
+			List<Apparat> apparater = new ArrayList<>();
+			
+			while (rs.next()) {
+				int apparat_id = rs.getInt("apparat_id");
+				String navn = rs.getString("navn");
+				String funksjonsbeskrivelse = rs.getString("funksjonsbeskrivelse");
+				
+				apparater.add(new Apparat(apparat_id, navn, funksjonsbeskrivelse));
+			}
+			return apparater;
+		} catch (SQLException e) {
+			System.out.println("db error during select from apparat: " + e.getMessage());
+		}
+		return null; 
 	}
 }
