@@ -23,6 +23,14 @@ public class Treningsøkt implements ActiveDomainObject{
 		return this.økt_id;
 	}
 	
+	public void setVarighet(int tid) {
+		this.varighet = tid;
+	}
+	
+	public int getVarighet() {
+		return this.varighet;
+	}
+	
 	//implementere init, save og add
 	@Override
 	public void initialize(Connection conn) {
@@ -37,11 +45,10 @@ public class Treningsøkt implements ActiveDomainObject{
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("db error during select of treningsøkt" + e.getMessage());
-			
+			System.out.println("db error during select of treningsøkt" + e.getMessage());	
 		}
 	}
-
+	
 	@Override
 	public void refresh(Connection conn) {
 		// TODO Auto-generated method stub

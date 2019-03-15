@@ -7,13 +7,29 @@ import modeller.Apparat;
 import modeller.Dbcon;
 
 public class ApparatController{
-	List<Apparat> apparat = new ArrayList<>();
+	private List<Apparat> apparater = new ArrayList<>();
+
+	Dbcon connection = new Dbcon();
 
 	public void getDatabase() {
-		Dbcon connection = new Dbcon();
 		connection.connect();
 		Connection connect = connection.getConnection();
-		apparat = Apparat.listApparater(connect);
+		apparater = Apparat.listApparater(connect);
+	}
+	
+	public void addApparat(String navn, String brukerinstruks) {
+		connection.connect();
+		Connection connect = connection.getConnection();		
+		int apparat_id = apparater.size() +1;	
+		Apparat nytt = new Apparat(apparat_id, navn, brukerinstruks);
+		//legger til i databasen
+		nytt.add(connect);
+		//legger til i listen over apparater
+		apparater.add(nytt);
+	}
+	
+	public void getApparat(Apparat apparat) {
+		
 	}
 }
 
