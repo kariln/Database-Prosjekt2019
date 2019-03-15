@@ -28,8 +28,16 @@ public class ApparatController{
 		apparater.add(nytt);
 	}
 	
-	public void getApparat(Apparat apparat) {
-		
+	public Apparat getApparat(int apparat_id) {
+		return apparater.get(apparat_id+1);
+	}
+	
+	public void refresh() {
+		connection.connect();
+		Connection connect = connection.getConnection();
+		for (Apparat a: apparater) {
+			a.refresh(connect);
+		}
 	}
 }
 
