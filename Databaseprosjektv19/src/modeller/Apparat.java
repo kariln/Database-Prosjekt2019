@@ -97,9 +97,10 @@ public class Apparat implements ActiveDomainObject {
 		return "Apparat: " + this.apparat_id + ", navn: " + this.navn + ", funksjonsbeskrivelse: " + this.brukerinstruks;
 	}
 	
+	// faktisk init
 	public static List<Apparat> listApparater(Connection conn){
 		try {
-			String SQL = "Select * from øvelse;";
+			String SQL = "Select * from apparat;";
 			PreparedStatement st = conn.prepareStatement(SQL);
 			ResultSet rs = st.executeQuery();
 			

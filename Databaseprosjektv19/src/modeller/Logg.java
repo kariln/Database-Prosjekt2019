@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class Logg implements ActiveDomainObject{
@@ -13,18 +16,21 @@ public class Logg implements ActiveDomainObject{
 	private int sett;
 	private int rep;
 	private int kilo;
-	private int øktid;
-	private int øvelseid;
+	private int økt_id;
+	private int øvelse_id;
 	
-	public Logg(Treningsøkt treningsøkt, Øvelse øvelse) {
+	public Logg(Treningsøkt treningsøkt, Øvelse øvelse,int sett, int, rep, int kilo) {
 		this.treningsøkt = treningsøkt;
 		this.øvelse = øvelse;
-		this.øktid = treningsøkt.getØkt_id();
-		this.øvelseid = øvelse.getØvelseId();
+		this.økt_id = treningsøkt.getØkt_id();
+		this.øvelse_id = øvelse.getØvelseId();
+		this.sett = sett;
+		this.rep = rep;
+		this.kilo = kilo;
 	}
 	
 	public String toString() {
-		return "Økt:" + this.øktid + "Øvelse:" + this.øvelseid + "Kilo:" + this.kilo + "Repetisjon:" + this.rep + "Sett:" + this.sett;
+		return "Økt:" + this.økt_id + "Øvelse:" + this.øvelse_id + "Kilo:" + this.kilo + "Repetisjon:" + this.rep + "Sett:" + this.sett;
 	}
 	
 	public int getSett() {
@@ -98,10 +104,31 @@ public class Logg implements ActiveDomainObject{
 			st.setInt(2, this.rep);
 			st.setInt(3, this.kilo);
 		}catch (SQLException e) {
-			System.out.println("db error during insertion to notat: " + e.getMessage());
+			System.out.println("db error during insertion to logg: " + e.getMessage());
 		}
 		
 	}
 	
+	public static List<Logg> listLogger(Connection conn){
+		try {
+			String SQL = "Select * from Logg";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			ResultSet rs = st.executeQuery();
+			
+			List<Logg> logger = new ArrayList<>();
+			
+			while (rs.next()) {
+				int sett = rs.getInt("sett");
+				int rep = rs.getInt("rep");
+				int kilo = rs.getInt("kilo");
+				
+				logger.add(new Logg());
+				//hvordan få inn de to objektene?
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("db error during select from logg: " + e.getMessage());
+		}
+	}
 
 }
