@@ -91,5 +91,9 @@ public class Resultater implements ActiveDomainObject{
 		}
 		
 	}
+	
+	public String toString() {
+		return "Treningsøkt:" + this.id + ", Prestasjon:" + this.prestasjon + ", Form:" + this.form;
+	}
 
 }

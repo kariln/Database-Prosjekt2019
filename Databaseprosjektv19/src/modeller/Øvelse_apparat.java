@@ -15,7 +15,7 @@ public class Øvelse_apparat implements ActiveDomainObject{
 	public Øvelse_apparat(Øvelse øvelse, Apparat apparat) {
 		this.øvelse = øvelse;
 		this.apparat = apparat;
-		økt_id = øvelse.getØvelse_id();
+		økt_id = øvelse.getØvelseId();
 		apparat_id = apparat.getApparatId();
 	}
 	
