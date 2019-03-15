@@ -7,12 +7,13 @@ import modeller.Apparat;
 import modeller.Dbcon;
 
 public class ApparatController{
-	public static void main(String[] args) {
+	List<Apparat> apparat = new ArrayList<>();
+
+	public void getDatabase() {
 		Dbcon connection = new Dbcon();
 		connection.connect();
 		Connection connect = connection.getConnection();
-	
-		List<Apparat> apparat = new ArrayList<>();
-		apparat = Apparat.listApparater(connect);	
+		apparat = Apparat.listApparater(connect);
 	}
 }
+
