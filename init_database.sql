@@ -58,7 +58,7 @@ CREATE TABLE øvelse (
     øvelse_id INT UNSIGNED NOT NULL,
     navn VARCHAR(32),
     beskrivelse TEXT,
-    fastmonter BOOLEAN,
+    fastmontert BOOLEAN,
     PRIMARY KEY (øvelse_id)
 );
 

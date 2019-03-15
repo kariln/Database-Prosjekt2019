@@ -27,7 +27,7 @@ bruker
 
 bruker_økt
 
-| bruker_id  | økt-id |
+| *bruker_id  | *økt-id |
 |---|---|
 
 
@@ -38,22 +38,22 @@ treningsøkt
 
 notat
 
-| økt_id | formål | opplevelse | diverse |
+| **økt_id | formål | opplevelse | diverse |
 | --- | --- | ---- | --- |
 
 resultat
 
-| økt_id | form | prestasjon |
+| **økt_id | form | prestasjon |
 |---|---| ---|
 
 økt_øvelse
 
-| øvelse_id | økt_id |
+| *øvelse_id | *økt_id |
 |---|---|
 
 logg
 
-| økt_id | øvelse_id  | sett | repetisjoner | kg |
+| *økt_id | *øvelse_id  | sett | repetisjoner | kg |
 |---|---|---|---|---|
 
 øvelse
@@ -63,7 +63,7 @@ logg
 
 øvelse_gruppe
 
-| øvelse_id | øvelsesgruppe-id
+| *øvelse_id | *øvelsesgruppe-id
 | --- | --- |
 
 øvelsesgruppe
@@ -78,5 +78,5 @@ apparat
 
 øvelse_apparat
 
-| apparat_id | øvelse_id |
+| *apparat_id | *øvelse_id |
 | --- | --- |
