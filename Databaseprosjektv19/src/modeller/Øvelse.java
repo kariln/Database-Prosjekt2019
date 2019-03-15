@@ -122,8 +122,6 @@ public class Øvelse implements ActiveDomainObject {
 				System.out.print(rs.getString(3) + "\t ");
 				System.out.println(rs.getBoolean(4));
 			}
-			
-		//	System.out.println(rs);
 		} catch (Exception e) {
 			
 		}
