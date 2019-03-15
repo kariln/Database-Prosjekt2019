@@ -8,6 +8,7 @@ public class Øvelse implements ActiveDomainObject {
 	private String navn;
 	private String beskrivelse;
 	private boolean fastmontert;
+	private Apparat apparat;
 	
 	// Konstruktør
 	public Øvelse(int id) {
@@ -21,7 +22,7 @@ public class Øvelse implements ActiveDomainObject {
 		this.fastmontert = fastmontert;
 	}
 	// Get
-	public int getØvelse_id() {
+	public int getØvelseId() {
 		return this.øvelse_id;
 	}
 	
@@ -54,7 +55,7 @@ public class Øvelse implements ActiveDomainObject {
 	public void initialize(Connection conn) {
 		// bruker prepared statements, les om det på tutorialspoint
 		try {
-			String SQL = "select øvelse_id, navn, beskrivelse, fastmonter from øvelse where øvelse_id=?";
+			String SQL = "select øvelse_id, navn, beskrivelse, fastmontert from øvelse where øvelse_id=?";
 			PreparedStatement st = conn.prepareStatement(SQL);
 			// fyller inn for ?
 // HVA ER DETTE???
@@ -104,15 +105,28 @@ public class Øvelse implements ActiveDomainObject {
 			System.out.println("db eror during insertion to øvelse: " + e.getMessage());
 		}
 	}
+	
+	// databasebehandlingsfunksjoner
+	public void listØvelser(Connection conn) {
+		// Bruker prepared statements
+		try {
+			String SQL = "SELECT * FROM øvelse;";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			ResultSet rs = st.executeQuery();
+			
+			// rs = result
+			while(rs.next()) {
+				//System.out.println(rs.getInt("øvelse_id"));
+				System.out.print(rs.getInt(1) + " ");
+				System.out.print(rs.getString(2) + "\t ");
+				System.out.print(rs.getString(3) + "\t ");
+				System.out.println(rs.getBoolean(4));
+			}
+			
+		//	System.out.println(rs);
+		} catch (Exception e) {
+			
+		}
+		
+	}	
 }
-
-
-//-- Øvelse
-//CREATE TABLE øvelse (
-//    øvelse_id INT UNSIGNED NOT NULL,
-//    navn VARCHAR(32),
-//    beskrivelse TEXT,
-//    fastmonter BOOLEAN,
-//    PRIMARY KEY (øvelse_id)
-//);
-
