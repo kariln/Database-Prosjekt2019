@@ -54,7 +54,7 @@ public class Logg implements ActiveDomainObject{
 	@Override
 	public void initialize(Connection conn) {
 		try {
-			String SQL = "select kilo, rep, sett from Logg where (øktid,øvelseid) values (?,?)";
+			String SQL = "select sett, rep, kilo from Logg where (øktid,øvelseid) values (?,?)";
 			PreparedStatement st = conn.prepareStatement(SQL);
 			st.setInt(1, this.sett);
 			st.setInt(2, this.rep);
@@ -66,7 +66,7 @@ public class Logg implements ActiveDomainObject{
 				this.kilo = rs.getInt("kilo");
 			}
 		}catch (SQLException e) {
-			System.out.println("db error during update of logg: " + e.getMessage());
+			System.out.println("db error during select of logg: " + e.getMessage());
 		}
 		
 	}
@@ -78,13 +78,28 @@ public class Logg implements ActiveDomainObject{
 
 	@Override
 	public void save(Connection conn) {
-		String SQL = "update "
-		
+		try {
+			String SQL = "update save set sett=?, rep=?, kilo=? where (øktid,øvelseid) values (?,?)";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setInt(1, this.sett);
+			st.setInt(2, this.rep);
+			st.setInt(3,this.kilo);
+		}catch (SQLException e) {
+			System.out.println("db error during update of logg: " + e.getMessage());
+		}
 	}
 
 	@Override
 	public void add(Connection conn) {
-		// TODO Auto-generated method stub
+		try {
+			String SQL = "insert into logg (sett,rep,kilo) values (?,?,?)";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setInt(1, this.sett);
+			st.setInt(2, this.rep);
+			st.setInt(3, this.kilo);
+		}catch (SQLException e) {
+			System.out.println("db error during insertion to notat: " + e.getMessage());
+		}
 		
 	}
 	
