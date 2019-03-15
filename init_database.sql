@@ -67,6 +67,7 @@ CREATE TABLE økt_øvelse (
     øvelse_id INT UNSIGNED NOT NULL,
     økt_id INT UNSIGNED NOT NULL,
     Resultatlogg TEXT,
+    CONSTRAINT økt_øvelse_PK PRIMARY KEY (øvelse_id, økt_id),	
     CONSTRAINT økt_øvelse_FK1 FOREIGN KEY (øvelse_id) REFERENCES øvelse(øvelse_id)
 		ON UPDATE CASCADE
         ON DELETE CASCADE,
@@ -102,7 +103,7 @@ CREATE TABLE øvelsesgruppe (
 CREATE TABLE øvelse_gruppe (
     øvelse_id INT UNSIGNED NOT NULL,
     øvelsesgruppe_id INT UNSIGNED NOT NULL,
-
+	CONSTRAINT øvelse_gruppe_PK PRIMARY KEY (øvelse_id, øvelsesgruppe_id),
     CONSTRAINT øvelse_gruppe_FK1 FOREIGN KEY (øvelse_id) REFERENCES øvelse(øvelse_id)
 		ON UPDATE CASCADE
         ON DELETE CASCADE,
@@ -125,6 +126,7 @@ CREATE TABLE apparat (
 CREATE TABLE øvelse_apparat (
 	apparat_id INT UNSIGNED NOT NULL,
     øvelse_id INT UNSIGNED NOT NULL,
+    CONSTRAINT øvelse_apparat_PK PRIMARY KEY (apparat_id, øvelse_id),
     CONSTRAINT øvelse_apparat_FK1 FOREIGN KEY (apparat_id) REFERENCES apparat(apparat_id)
 		ON UPDATE CASCADE
         ON DELETE CASCADE,
