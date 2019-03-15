@@ -43,25 +43,52 @@ public class Resultater implements ActiveDomainObject{
 
 	@Override
 	public void initialize(Connection conn) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String SQL = "select form, prestasjon from Resultater where id=?";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setInt(1, this.id);
+			ResultSet rs = st.executeQuery();
+			
+			while (rs.next()) {
+				this.form = rs.getInt("form");
+				this.prestasjon = rs.getInt("prestasjon");
+			}
+		}catch (SQLException e) {
+				System.out.println("db error during select of Resultater: " + e.getMessage());
+		}
 	}
+	
 
 	@Override
 	public void refresh(Connection conn) {
-		// TODO Auto-generated method stub
+		initialize(conn);
 		
 	}
 
 	@Override
 	public void save(Connection conn) {
-		// TODO Auto-generated method stub
+		try {
+			String SQL = "update save set form=?, prestasjon=? where id=?";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setInt(1, this.prestasjon);
+			st.setInt(1, this.form);
+			
+		}catch (SQLException e) {
+			System.out.println("db error during update of Resultater: " + e.getMessage());
+		}
 		
 	}
 
 	@Override
 	public void add(Connection conn) {
-		// TODO Auto-generated method stub
+		try {
+			String SQL = "insert into Resultater (form, prestasjon) values (?,?,?)";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setInt(1, this.form);
+			st.setInt(1,this.prestasjon);
+		}catch (SQLException e) {
+			System.out.println("db error during insertion to Resultater: " + e.getMessage());
+		}
 		
 	}
 
