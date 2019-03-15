@@ -1,6 +1,8 @@
 package modeller;
 
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Øvelse implements ActiveDomainObject {
 	
@@ -79,11 +81,12 @@ public class Øvelse implements ActiveDomainObject {
 	@Override
 	public void save(Connection conn) {
 		try {
-			String SQL = "update øvelse set navn=?, where øving_id=?";
+			String SQL = "update øvelse set navn=?, beskrivelse=?, fastmontert=?, where øving_id=?";
 			PreparedStatement st = conn.prepareStatement(SQL);
 			st.setString(1, this.navn);
 			st.setString(2, this.beskrivelse);
 			st.setBoolean(3, this.fastmontert);
+			st.setInt(4, this.øvelse_id);
 			st.execute();
 			
 		} catch (SQLException e) {
@@ -107,7 +110,7 @@ public class Øvelse implements ActiveDomainObject {
 	}
 	
 	// databasebehandlingsfunksjoner
-	public void listØvelser(Connection conn) {
+	public static void printØvelser(Connection conn) {
 		// Bruker prepared statements
 		try {
 			String SQL = "SELECT * FROM øvelse;";
@@ -125,6 +128,31 @@ public class Øvelse implements ActiveDomainObject {
 		} catch (Exception e) {
 			
 		}
+	}
 		
+	public static List<Øvelse> listØvelser(Connection conn) {
+		try {
+			String SQL = "SELECT * FROM øvelse;";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			ResultSet rs = st.executeQuery();
+			List<Øvelse> øvelser = new ArrayList<>();
+			
+			while (rs.next()) {
+				int øvelse_id = rs.getInt(1);
+				
+				// Bruker konstruktøren til øvelse.
+				øvelser.add(new Øvelse(øvelse_id));
+			}
+			// Henter navn++ fra database.
+			for(Øvelse ele : øvelser) {
+				ele.initialize(conn);
+			}
+			return øvelser;
+			
+		} catch (SQLException e) {
+			// Catch me if you can.
+			System.out.println("db error during select from øvelse: " + e.getMessage());
+		}
+		return null;
 	}	
-}
+}	
