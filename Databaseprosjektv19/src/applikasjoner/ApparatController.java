@@ -31,5 +31,13 @@ public class ApparatController{
 	public Apparat getApparat(int apparat_id) {
 		return apparater.get(apparat_id+1);
 	}
+	
+	public void refresh() {
+		connection.connect();
+		Connection connect = connection.getConnection();
+		for (Apparat a: apparater) {
+			a.refresh(connect);
+		}
+	}
 }
 
