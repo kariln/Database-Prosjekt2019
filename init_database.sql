@@ -34,7 +34,7 @@ CREATE TABLE økt_øvelse (
     øvelse_id INT UNSIGNED NOT NULL,
     økt_id INT UNSIGNED NOT NULL,
     Resultatlogg TEXT,
-    CONSTRAINT økt_øvelse_PK PRIMARY KEY (øvelse_id, økt_id),	
+    CONSTRAINT økt_øvelse_PK PRIMARY KEY (øvelse_id, økt_id),
     CONSTRAINT økt_øvelse_FK1 FOREIGN KEY (øvelse_id) REFERENCES øvelse(øvelse_id)
 		ON UPDATE CASCADE
         ON DELETE CASCADE,
@@ -45,15 +45,13 @@ CREATE TABLE økt_øvelse (
 
 -- Logg
 CREATE TABLE logg (
-  økt_id INT UNSIGNED NOT NULL,
   øvelse_id INT UNSIGNED NOT NULL,
+  dato_tidspunkt DATETIME,
   sett INT,
   repetisjoner INT,
   kg INT,
-  CONSTRAINT logg_FK1 FOREIGN KEY (økt_id) REFERENCES treningsøkt(økt_id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE,
-CONSTRAINT logg_FK2 FOREIGN KEY (øvelse_id) REFERENCES øvelse(øvelse_id)
+  
+  CONSTRAINT logg_FK2 FOREIGN KEY (øvelse_id) REFERENCES øvelse(øvelse_id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
