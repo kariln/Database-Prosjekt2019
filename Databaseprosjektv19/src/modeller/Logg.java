@@ -8,29 +8,32 @@ import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
+//må legge til timestamp
 
 public class Logg implements ActiveDomainObject{
-	
-	private Treningsøkt treningsøkt;
 	private Øvelse øvelse;
 	private int sett;
 	private int rep;
 	private int kilo;
 	private int økt_id;
 	private int øvelse_id;
+	private Timestamp logg_tidspunkt;
 	
-	public Logg(Treningsøkt treningsøkt, Øvelse øvelse,int sett, int, rep, int kilo) {
-		this.treningsøkt = treningsøkt;
+	public Logg(Øvelse øvelse, Timestamp logg_tidspunkt, int sett, int rep, int kilo) {
 		this.øvelse = øvelse;
-		this.økt_id = treningsøkt.getØkt_id();
 		this.øvelse_id = øvelse.getØvelseId();
 		this.sett = sett;
 		this.rep = rep;
 		this.kilo = kilo;
+		this.logg_tidspunkt = logg_tidspunkt;
 	}
 	
 	public String toString() {
 		return "Økt:" + this.økt_id + "Øvelse:" + this.øvelse_id + "Kilo:" + this.kilo + "Repetisjon:" + this.rep + "Sett:" + this.sett;
+	}
+	
+	public Timestamp getTime() {
+		return logg_tidspunkt;
 	}
 	
 	public int getSett() {
@@ -43,6 +46,10 @@ public class Logg implements ActiveDomainObject{
 	
 	public int getKilo() {
 		return this.kilo;
+	}
+	
+	public void setTime(Timestamp logg_tidspunkt) {
+		this.logg_tidspunkt = logg_tidspunkt;
 	}
 	
 	public void setSett(int sett) {
@@ -106,6 +113,10 @@ public class Logg implements ActiveDomainObject{
 		}catch (SQLException e) {
 			System.out.println("db error during insertion to logg: " + e.getMessage());
 		}
+		
+	}
+	
+	public void knyttloggtiløvelse(Øvelse øvelse) {
 		
 	}
 	
