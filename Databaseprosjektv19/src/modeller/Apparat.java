@@ -94,7 +94,7 @@ public class Apparat implements ActiveDomainObject {
 	}
 	
 	public String toString() {
-		return "Apparat: " + this.apparat_id + ", navn: " + this.navn + ", funksjonsbeskrivelse: " + this.brukerinstruks;
+		return "Apparat: " + this.apparat_id + ", navn: " + this.navn + ", brukerinstruks: " + this.brukerinstruks;
 	}
 	
 	// faktisk init
@@ -109,9 +109,9 @@ public class Apparat implements ActiveDomainObject {
 			while (rs.next()) {
 				int apparat_id = rs.getInt("apparat_id");
 				String navn = rs.getString("navn");
-				String funksjonsbeskrivelse = rs.getString("funksjonsbeskrivelse");
+				String brukerinstruks = rs.getString("brukerinstruks");
 				
-				apparater.add(new Apparat(apparat_id, navn, funksjonsbeskrivelse));
+				apparater.add(new Apparat(apparat_id, navn, brukerinstruks));
 			}
 			return apparater;
 		} catch (SQLException e) {
