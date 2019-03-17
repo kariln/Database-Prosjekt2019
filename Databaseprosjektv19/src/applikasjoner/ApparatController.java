@@ -17,6 +17,14 @@ public class ApparatController{
 		apparater = Apparat.listApparater(connect);
 	}
 	
+	public String toString() {
+		String s = new String();
+		for (int i =1; i <= apparater.size(); i++){
+			s += apparater.get(i).toString() + '\n';
+		}
+		return s;
+	}
+	
 	public void addApparat(String navn, String brukerinstruks) {
 		connection.connect();
 		Connection connect = connection.getConnection();		
