@@ -1,13 +1,3 @@
-
-
--- Bruker
-CREATE TABLE bruker (
-    bruker_id INT UNSIGNED NOT NULL,
-    navn VARCHAR(64) NOT NULL,
-    PRIMARY KEY (bruker_id)
-);
-
-
 -- Treningsøkt
 CREATE TABLE treningsøkt (
     økt_id INT UNSIGNED NOT NULL,
@@ -15,20 +5,6 @@ CREATE TABLE treningsøkt (
     varighet INT UNSIGNED,
     PRIMARY KEY (økt_id)
 );
-
-
--- Bruker_økt
-CREATE TABLE bruker_økt (
-    bruker_id INT UNSIGNED NOT NULL,
-    økt_id INT UNSIGNED NOT NULL,
-    CONSTRAINT bruker_økt_FK1 FOREIGN KEY (bruker_id) REFERENCES bruker(bruker_id)
-		ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT bruker_økt_FK2 FOREIGN KEY (økt_id) REFERENCES treningsøkt(økt_id)
-		ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
 
 -- Notat
 CREATE TABLE notat (
