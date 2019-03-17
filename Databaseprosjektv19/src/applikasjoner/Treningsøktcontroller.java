@@ -24,6 +24,7 @@ public class Treningsøktcontroller {
 		Treningsøkt ny = new Treningsøkt(øvelse_id, tid, varighet);
 		ny.add(connect);
 		treningsøkter.add(ny);
+		//må også ha funksjonalitet for å legge til tilhørende ting, typ øvelser
 	}
 	
 	public Treningsøkt getTreningsøkt(int øvelse_id) {
@@ -37,7 +38,6 @@ public class Treningsøktcontroller {
 			økt.refresh(connect);
 		}
 	}
-	
 	
 	// få opp n sist gjennomførte treningsøkter med notater, der n spesifiseres av bruker
 	
