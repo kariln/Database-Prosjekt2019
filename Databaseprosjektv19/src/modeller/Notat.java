@@ -11,6 +11,9 @@ public class Notat implements ActiveDomainObject{
 	private int opplevelse;
 	private String diverse;
 	private Treningsøkt treningsøkt;
+	private int form;
+	private int prestasjon;
+	
 	
 	public Notat(Treningsøkt treningsøkt) {
 		this.treningsøkt = treningsøkt;
