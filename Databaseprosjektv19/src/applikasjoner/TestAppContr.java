@@ -10,6 +10,8 @@ public class TestAppContr extends Dbcon{
 		ApparatController controller = new ApparatController();
 		controller.getDatabase();
 		System.out.println("Suksess");
-		controller.toString();
+		controller.addApparat("Sykkel", "Sykle");
+
+		System.out.println(controller.toString());
 	}
 }

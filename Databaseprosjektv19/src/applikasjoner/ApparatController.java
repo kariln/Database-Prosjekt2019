@@ -19,7 +19,7 @@ public class ApparatController{
 	
 	public String toString() {
 		String s = new String();
-		for (int i =1; i <= apparater.size(); i++){
+		for (int i =0; i <= apparater.size()-1; i++){
 			s += apparater.get(i).toString() + '\n';
 		}
 		return s;
@@ -37,7 +37,7 @@ public class ApparatController{
 	}
 	
 	public Apparat getApparat(int apparat_id) {
-		return apparater.get(apparat_id+1);
+		return apparater.get(apparat_id-1);
 	}
 	
 	public void refresh() {
