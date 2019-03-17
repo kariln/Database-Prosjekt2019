@@ -12,9 +12,11 @@ public class Resultater implements ActiveDomainObject{
 	private Treningsøkt treningsøkt;
 	private int id;
 	
-	public Resultater(Treningsøkt treningsøkt) {
+	public Resultater(Treningsøkt treningsøkt, int form, int prestasjon) {
 		this.treningsøkt = treningsøkt;
 		this.id = treningsøkt.getØkt_id();
+		this.form = form;
+		this.prestasjon = prestasjon;
 	}
 	
 	public int getId() {
