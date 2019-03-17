@@ -111,4 +111,8 @@ public class Treningsøkt implements ActiveDomainObject{
 		}
 		return null;		
 	}
+	
+	public String toString() {
+		return "Treningsøkt: " + this.økt_id + ", dato og tid: " + this.dato_tidspunkt + ", varighet: " + this.varighet;
+	}
 }
