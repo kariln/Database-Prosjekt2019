@@ -11,6 +11,7 @@ public class Treningsøktcontroller {
 	
 	Dbcon connection = new Dbcon();
 	
+	//init
 	public void getDatabase() {
 		connection.connect();
 		Connection connect = connection.getConnection();
@@ -24,13 +25,22 @@ public class Treningsøktcontroller {
 		Treningsøkt ny = new Treningsøkt(øvelse_id, tid, varighet);
 		ny.add(connect);
 		treningsøkter.add(ny);
-		//må også ha funksjonalitet for å legge til tilhørende ting, typ øvelser
 	}
 	
+	//tilhørende data til en treningsøkt
+	//uferdig
+	public void addNotat() {
+		connection.connect();
+		Connection connect = connection.getConnection();
+		
+	}
+	
+	//getter for treningsøkt, henter på øvelsesid
 	public Treningsøkt getTreningsøkt(int øvelse_id) {
 		return treningsøkter.get(øvelse_id-1);
 	}
 	
+	//oppdaterer objekter ihht databasen
 	public void refresh() {
 		connection.connect();
 		Connection connect = connection.getConnection();
@@ -38,8 +48,7 @@ public class Treningsøktcontroller {
 			økt.refresh(connect);
 		}
 	}
-	
 	// få opp n sist gjennomførte treningsøkter med notater, der n spesifiseres av bruker
-	
+
 
 }

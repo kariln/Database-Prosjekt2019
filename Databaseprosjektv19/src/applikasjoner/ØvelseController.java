@@ -38,8 +38,5 @@ public class ÿvelseController {
 		nytt.add(connect());
 		refresh();
 	}
-	public void knyttÿvelseTilApparat() {
-		
-	}
 	
 }

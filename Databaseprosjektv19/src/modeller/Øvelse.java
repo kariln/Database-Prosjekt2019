@@ -67,6 +67,7 @@ public class Øvelse implements ActiveDomainObject {
 				this.navn = rs.getString("navn");
 				this.beskrivelse = rs.getString("beskrivelse");
 				this.fastmontert = rs.getBoolean("fastmontert");
+				// Apparat ID
 			}
 			
 		} catch (Exception e) {
@@ -154,5 +155,19 @@ public class Øvelse implements ActiveDomainObject {
 			System.out.println("db error during select from øvelse: " + e.getMessage());
 		}
 		return null;
-	}	
+	}
+	public void knyttØvelseTilApparat(int appId, Connection conn) {
+		try {
+			String SQL = "INSERT INTO øvelse_apparat VALUES (?, ?);";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setInt(1, appId);
+			st.setInt(2, this.øvelse_id);
+			st.execute();
+		} catch (SQLException e) {
+			System.out.println("db error during insert to øvelse_apparat.");
+		}
+	}
 }	
+
+//INSERT INTO table_name (column1, column2, column3, ...)
+//VALUES (value1, value2, value3, ...); 
