@@ -3,14 +3,18 @@ package applikasjoner;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import modeller.Øvelse;
 import modeller.Apparat;
 import modeller.Dbcon;
+import modeller.Logg;
 
 public class ØvelseController {
 	List<Øvelse> øvelse = new ArrayList<>();
-		
+	
+	Dbcon connection = new Dbcon();
+	
 	private Connection connect() {
 		Dbcon connection = new Dbcon();
 		connection.connect();
@@ -39,4 +43,16 @@ public class ØvelseController {
 		refresh();
 	}
 	
+	//legger til logg
+	public Øvelse getØvelse(int øvelse_id) {
+		return øvelse.get(øvelse_id-1);
+	}
+	
+	public void addLogg(int øvelse_id,Timestamp logg_tidspunkt, int sett, int rep, int kilo) {
+		connection.connect();
+		Connection connect = connection.getConnection();
+		Logg ny_logg = new Logg(øvelse_id,logg_tidspunkt,sett,rep,kilo);
+		ny_logg.add(connect);
+	}
+	//hvordan skal jeg bruke metoden for å knytte ting sammen? 
 }

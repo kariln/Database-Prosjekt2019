@@ -73,10 +73,10 @@ public class Logg implements ActiveDomainObject{
 	}
 
 	@Override
-	public void initialize(Connection conn) {
+	public void initialize(Connection connection) {
 		try {
 			String SQL = "select sett, rep, kilo from Logg where (øktid,øvelseid) values (?,?)";
-			PreparedStatement st = conn.prepareStatement(SQL);
+			PreparedStatement st = connection.prepareStatement(SQL);
 			st.setInt(1, this.sett);
 			st.setInt(2, this.rep);
 			st.setInt(3, this.kilo);
@@ -93,15 +93,15 @@ public class Logg implements ActiveDomainObject{
 	}
 
 	@Override
-	public void refresh(Connection conn) {
-		initialize(conn);
+	public void refresh(Connection connection) {
+		initialize(connection);
 	}
 
 	@Override
-	public void save(Connection conn) {
+	public void save(Connection connection) {
 		try {
 			String SQL = "update save set sett=?, rep=?, kilo=? where (øktid,øvelseid) values (?,?)";
-			PreparedStatement st = conn.prepareStatement(SQL);
+			PreparedStatement st = connection.prepareStatement(SQL);
 			st.setInt(1, this.sett);
 			st.setInt(2, this.rep);
 			st.setInt(3,this.kilo);
@@ -111,10 +111,10 @@ public class Logg implements ActiveDomainObject{
 	}
 
 	@Override
-	public void add(Connection conn) {
+	public void add(Connection connection) {
 		try {
 			String SQL = "insert into logg (sett,rep,kilo) values (?,?,?)";
-			PreparedStatement st = conn.prepareStatement(SQL);
+			PreparedStatement st = connection.prepareStatement(SQL);
 			st.setInt(1, this.sett);
 			st.setInt(2, this.rep);
 			st.setInt(3, this.kilo);
@@ -126,10 +126,10 @@ public class Logg implements ActiveDomainObject{
 	
 	
 	//denne og liste-metoden må jobbes med
-	public int knyttloggtiløvelse(Timestamp logg_tidspunkt, Connection conn) {
+	public int knyttloggtiløvelse(Timestamp logg_tidspunkt, Connection connection) {
 		try {
 			String SQL = "insert into øvelse_logg values (?,?)";
-			PreparedStatement st = conn.prepareStatement(SQL);
+			PreparedStatement st = connection.prepareStatement(SQL);
 			st.setTimestamp(1,logg_tidspunkt);
 			st.setInt(2, øvelse_id);
 			ResultSet rs = st.executeQuery();
@@ -144,11 +144,11 @@ public class Logg implements ActiveDomainObject{
 		
 	}
 	
-	public static List<Logg> listLogger(Connection conn){
+	public static List<Logg> listLogger(int øvelse_id, Connection connection){
 		//har endret metoden fra static til non-static. går det bra?
 		try {
 			String SQL = "Select * from Logg";
-			PreparedStatement st = conn.prepareStatement(SQL);
+			PreparedStatement st = connection.prepareStatement(SQL);
 			ResultSet rs = st.executeQuery();
 			List<Logg> logger = new ArrayList<>();
 			
@@ -157,15 +157,18 @@ public class Logg implements ActiveDomainObject{
 				int rep = rs.getInt("rep");
 				int kilo = rs.getInt("kilo");
 				Timestamp logg_tidspunkt = rs.getTimestamp("logg_tidspunkt");
-				int øvelse_id = knyttloggtiløvelse(logg_tidspunkt,conn));
+				//int øvelse_id = knyttloggtiløvelse(logg_tidspunkt,conn));
 				Logg logg = new Logg(øvelse_id, logg_tidspunkt,sett, rep, kilo);
 				logger.add(logg);
 				
+				
 			}
-			
+			return logger;
 		} catch (SQLException e) {
 			System.out.println("db error during select from logg: " + e.getMessage());
 		}
+	return null;
 	}
+	
 
 }
