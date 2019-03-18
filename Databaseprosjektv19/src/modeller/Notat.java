@@ -82,7 +82,7 @@ public class Notat implements ActiveDomainObject{
 	@Override
 	public void save(Connection conn) {
 		try {
-			String SQL = "update save set formål=?, opplevelse=?, diverse=? where økt_id=?";
+			String SQL = "update notat set formål=?, opplevelse=?, diverse=? where økt_id=?";
 			PreparedStatement st = conn.prepareStatement(SQL);
 			st.setString(1, this.formål);
 			st.setInt(2, this.opplevelse);

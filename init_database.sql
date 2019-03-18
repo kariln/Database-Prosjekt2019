@@ -60,7 +60,7 @@ CREATE TABLE logg (
 CREATE TABLE øvelsesgruppe (
     øvelsesgruppe_id INT UNSIGNED NOT NULL,
     navn VARCHAR(64) NOT NULL,
-    Beskrivelse TEXT,
+    beskrivelse TEXT,
     PRIMARY KEY (øvelsesgruppe_id)
 );
 
