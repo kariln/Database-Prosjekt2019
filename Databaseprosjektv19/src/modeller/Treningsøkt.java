@@ -65,7 +65,7 @@ public class Treningsøkt implements ActiveDomainObject{
 	@Override
 	public void save(Connection conn) {
 		try {
-			String SQL = "update apparat set dato_tidspunkt=?, varighet=? where økt_id=?";
+			String SQL = "update treningsøkt set dato_tidspunkt=?, varighet=? where økt_id=?";
 			PreparedStatement st = conn.prepareStatement(SQL);
 			st.setTimestamp(1, this.dato_tidspunkt);
 			st.setInt(2, this.varighet);
