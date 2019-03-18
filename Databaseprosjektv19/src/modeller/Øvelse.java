@@ -53,6 +53,14 @@ public class Øvelse implements ActiveDomainObject {
 	}
 	
 	// Databasebehandlingsfunksjoner
+	private Connection connect() {
+		Dbcon connection = new Dbcon();
+		connection.connect();
+		Connection connect = connection.getConnection();
+		return connect;
+	}
+	
+	
 	@Override
 	public void initialize(Connection conn) {
 		// bruker prepared statements, les om det på tutorialspoint
@@ -156,22 +164,22 @@ public class Øvelse implements ActiveDomainObject {
 		}
 		return null;
 	}
-	public void knyttØvelseTilApparat(int appId, Connection conn) {
+	public void knyttØvelseTilApparat(int appId) {
 		try {
 			String SQL = "INSERT INTO øvelse_apparat VALUES (?, ?);";
-			PreparedStatement st = conn.prepareStatement(SQL);
+			PreparedStatement st = connect().prepareStatement(SQL);
 			st.setInt(1, appId);
 			st.setInt(2, this.øvelse_id);
 			st.execute();
 		} catch (SQLException e) {
-			System.out.println("db error during insert to øvelse_apparat.");
+			System.out.println("db error during insert to øvelse_apparat." + e.getMessage());
 		}
 	}
 	
-	public void knyttØvelseTilGruppe(int gruppe_id, Connection conn) {
+	public void knyttØvelseTilGruppe(int gruppe_id, Connection connect) {
 		try {
-			String SQL = "insert into øvelse_gruppe values ?,?";
-			PreparedStatement st = conn.prepareStatement(SQL);
+			String SQL = "INSERT INTO øvelse_gruppe VALUES (?,?);";
+			PreparedStatement st = connect.prepareStatement(SQL);
 			st.setInt(1, this.øvelse_id);
 			st.setInt(2, gruppe_id);
 			st.execute();
