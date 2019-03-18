@@ -20,9 +20,9 @@ public class Treningsøkt implements ActiveDomainObject{
 		this.økt_id = økt_id;
 	}
 	
-	public Treningsøkt(int økt_id, Timestamp dato_tidspunkt, int varighet) {
+	public Treningsøkt(int økt_id, int varighet) {
 		this.økt_id = økt_id;
-		this.dato_tidspunkt = dato_tidspunkt;
+		this.dato_tidspunkt = new Timestamp(System.currentTimeMillis());
 		this.varighet = varighet;
 	}
 	
@@ -102,7 +102,7 @@ public class Treningsøkt implements ActiveDomainObject{
 				Timestamp tid = rs.getTimestamp("dato_tidspunkt");
 				int varighet = rs.getInt("varighet");
 				
-				treningsøkter.add(new Treningsøkt(økt_id, tid, varighet));
+				treningsøkter.add(new Treningsøkt(økt_id, varighet));
 			}
 			return treningsøkter;
 			

@@ -26,7 +26,7 @@ public class Treningsøktcontroller {
 		connection.connect();
 		Connection connect = connection.getConnection();
 		int øvelse_id = treningsøkter.size()+1;
-		Treningsøkt ny = new Treningsøkt(øvelse_id, tid, varighet);
+		Treningsøkt ny = new Treningsøkt(øvelse_id, varighet);
 		ny.add(connect);
 		treningsøkter.add(ny);
 	}
@@ -61,7 +61,7 @@ public class Treningsøktcontroller {
 		Connection connect = connection.getConnection();
 		String output = new String();
 		try {
-			String SQL = "Select treningsøkt.økt_id, dato_tidspunkt, varighet, formål, opplevelse, diverse, form, prestasjon from treningsøkt join notat on treningsøkt.økt_id = notat.økt_id order by dato_tidspunkt asc LIMIT ?";
+			String SQL = "Select treningsøkt.økt_id, dato_tidspunkt, varighet, formål, opplevelse, diverse, form, prestasjon from treningsøkt join notat on treningsøkt.økt_id = notat.økt_id order by dato_tidspunkt desc LIMIT ?";
 			PreparedStatement st = connect.prepareStatement(SQL);
 			st.setInt(1, n);
 			ResultSet rs = st.executeQuery();
@@ -76,16 +76,6 @@ public class Treningsøktcontroller {
 				output += ", form: " + rs.getInt("form");
 				output += ", prestasjon: " +rs.getInt("prestasjon") + "\n";
 			}
-			/*for (int i =1; i<= n; i++) {
-				output += "øktid:" + rs.getInt("økt_id");
-				output += ", gjennomført: " + rs.getTimestamp("dato_tidspunkt");
-				output += ", varighet i minutter: " +rs.getInt("varighet");
-				output += ", formål: " + rs.getString("formål");
-				output += ", opplevelse: " + rs.getInt("opplevelse");
-				output += ", diverse" + rs.getString("diverse");
-				output += ", form" + rs.getInt("form");
-				output += ", prestasjon: " +rs.getInt("prestasjon") + "\n";
-			}*/
 			
 			System.out.println(output);
 		} catch (SQLException e) {

@@ -17,6 +17,8 @@ public class Main {
 		//controller.addTreningsøkt(new Timestamp(System.currentTimeMillis()), 45);
 		controller.getDatabase();
 		//controller.addNotat(1, "kondisjon", 5, "spinningtime", 4, 5);
+		//controller.addTreningsøkt(new Timestamp(System.currentTimeMillis()), 30);
+		//controller.addNotat(2, "noe", 10, "kult", 3, 1);
 		controller.getBestemteØkter(1);
 	}
 	
