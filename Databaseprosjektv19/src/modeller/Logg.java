@@ -15,7 +15,7 @@ public class Logg implements ActiveDomainObject{
 	private int sett;
 	private int rep;
 	private int kilo;
-	private int økt_id;
+	//private int økt_id;
 	private int øvelse_id;
 	private Timestamp logg_tidspunkt;
 	
@@ -29,7 +29,7 @@ public class Logg implements ActiveDomainObject{
 	}
 	
 	public String toString() {
-		return "Økt:" + this.økt_id + "Øvelse:" + this.øvelse_id + "Kilo:" + this.kilo + "Repetisjon:" + this.rep + "Sett:" + this.sett;
+		return "Øvelse:" + this.øvelse_id + "Kilo:" + this.kilo + "Repetisjon:" + this.rep + "Sett:" + this.sett;
 	}
 	
 	public Timestamp getTime() {
@@ -116,25 +116,43 @@ public class Logg implements ActiveDomainObject{
 		
 	}
 	
-	public void knyttloggtiløvelse(Øvelse øvelse) {
+	
+	//denne og liste-metoden må jobbes med
+	public Øvelse knyttloggtiløvelse(Timestamp logg_tidspunkt, Connection conn) {
+		try {
+			String SQL = "insert into øvelse_logg values (?,?)";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setTimestamp(1,logg_tidspunkt);
+			st.setInt(2, øvelse_id);
+			ResultSet rs = st.executeQuery();
+			int øvelse_id = rs.getInt("øvelse_id"); 
+			Øvelse øvelse = new Øvelse(øvelse_id);
+			//hvordan kan jeg kjøre slik at jeg får printet?
+			
+		}catch (SQLException e) {
+			System.out.println("db error during insert to øvelse_logg.");
+		}
+		return øvelse;
 		
 	}
 	
-	public static List<Logg> listLogger(Connection conn){
+	public List<Logg> listLogger(Connection conn){
+		//har endret metoden fra static til non-static. går det bra?
 		try {
 			String SQL = "Select * from Logg";
 			PreparedStatement st = conn.prepareStatement(SQL);
 			ResultSet rs = st.executeQuery();
-			
 			List<Logg> logger = new ArrayList<>();
 			
 			while (rs.next()) {
 				int sett = rs.getInt("sett");
 				int rep = rs.getInt("rep");
 				int kilo = rs.getInt("kilo");
+				Timestamp logg_tidspunkt = rs.getTimestamp("logg_tidspunkt");
+				øvelse = knyttloggtiløvelse(logg_tidspunkt,conn);
 				
-				logger.add(new Logg());
-				//hvordan få inn de to objektene?
+				logger.add(new Logg(øvelse, logg_tidspunkt,sett, rep, kilo));
+				
 			}
 			
 		} catch (SQLException e) {
