@@ -18,6 +18,7 @@ public class Logg implements ActiveDomainObject{
 	//private int økt_id;
 	private int øvelse_id;
 	private Timestamp logg_tidspunkt;
+	private int øvelse_id_logg;
 	
 //	public Logg(Øvelse øvelse, Timestamp logg_tidspunkt, int sett, int rep, int kilo) {
 //		this.øvelse = øvelse;
@@ -133,18 +134,18 @@ public class Logg implements ActiveDomainObject{
 			st.setTimestamp(1,logg_tidspunkt);
 			st.setInt(2, øvelse_id);
 			ResultSet rs = st.executeQuery();
-			int øvelse_id = rs.getInt("øvelse_id"); 
+			øvelse_id_logg = rs.getInt("øvelse_id"); 
 			//Øvelse øvelse = new Øvelse(øvelse_id);
 			//hvordan kan jeg kjøre slik at jeg får printet?
 			
 		}catch (SQLException e) {
 			System.out.println("db error during insert to øvelse_logg.");
 		}
-		return øvelse_id;
+		return øvelse_id_logg;
 		
 	}
 	
-	public static List<Logg> listLogger(int øvelse_id, Connection connection){
+	public List<Logg> listLogger(int øvelse_id, Connection connection){
 		//har endret metoden fra static til non-static. går det bra?
 		try {
 			String SQL = "Select * from Logg";
@@ -157,7 +158,7 @@ public class Logg implements ActiveDomainObject{
 				int rep = rs.getInt("rep");
 				int kilo = rs.getInt("kilo");
 				Timestamp logg_tidspunkt = rs.getTimestamp("logg_tidspunkt");
-				//int øvelse_id = knyttloggtiløvelse(logg_tidspunkt,conn));
+				øvelse_id = knyttloggtiløvelse(logg_tidspunkt,connection);
 				Logg logg = new Logg(øvelse_id, logg_tidspunkt,sett, rep, kilo);
 				logger.add(logg);
 				
