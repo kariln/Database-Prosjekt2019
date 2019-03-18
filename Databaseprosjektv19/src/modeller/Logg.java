@@ -19,9 +19,17 @@ public class Logg implements ActiveDomainObject{
 	private int øvelse_id;
 	private Timestamp logg_tidspunkt;
 	
-	public Logg(Øvelse øvelse, Timestamp logg_tidspunkt, int sett, int rep, int kilo) {
-		this.øvelse = øvelse;
-		this.øvelse_id = øvelse.getØvelseId();
+//	public Logg(Øvelse øvelse, Timestamp logg_tidspunkt, int sett, int rep, int kilo) {
+//		this.øvelse = øvelse;
+//		this.øvelse_id = øvelse.getØvelseId();
+//		this.sett = sett;
+//		this.rep = rep;
+//		this.kilo = kilo;
+//		this.logg_tidspunkt = logg_tidspunkt;
+//	}
+	
+	public Logg(int øvelse_id,Timestamp logg_tidspunkt, int sett, int rep, int kilo) {
+		this.øvelse_id = øvelse_id;
 		this.sett = sett;
 		this.rep = rep;
 		this.kilo = kilo;
@@ -118,7 +126,7 @@ public class Logg implements ActiveDomainObject{
 	
 	
 	//denne og liste-metoden må jobbes med
-	public Øvelse knyttloggtiløvelse(Timestamp logg_tidspunkt, Connection conn) {
+	public int knyttloggtiløvelse(Timestamp logg_tidspunkt, Connection conn) {
 		try {
 			String SQL = "insert into øvelse_logg values (?,?)";
 			PreparedStatement st = conn.prepareStatement(SQL);
@@ -126,17 +134,17 @@ public class Logg implements ActiveDomainObject{
 			st.setInt(2, øvelse_id);
 			ResultSet rs = st.executeQuery();
 			int øvelse_id = rs.getInt("øvelse_id"); 
-			Øvelse øvelse = new Øvelse(øvelse_id);
+			//Øvelse øvelse = new Øvelse(øvelse_id);
 			//hvordan kan jeg kjøre slik at jeg får printet?
 			
 		}catch (SQLException e) {
 			System.out.println("db error during insert to øvelse_logg.");
 		}
-		return øvelse;
+		return øvelse_id;
 		
 	}
 	
-	public List<Logg> listLogger(Connection conn){
+	public static List<Logg> listLogger(Connection conn){
 		//har endret metoden fra static til non-static. går det bra?
 		try {
 			String SQL = "Select * from Logg";
@@ -149,9 +157,9 @@ public class Logg implements ActiveDomainObject{
 				int rep = rs.getInt("rep");
 				int kilo = rs.getInt("kilo");
 				Timestamp logg_tidspunkt = rs.getTimestamp("logg_tidspunkt");
-				øvelse = knyttloggtiløvelse(logg_tidspunkt,conn);
-				
-				logger.add(new Logg(øvelse, logg_tidspunkt,sett, rep, kilo));
+				int øvelse_id = knyttloggtiløvelse(logg_tidspunkt,conn));
+				Logg logg = new Logg(øvelse_id, logg_tidspunkt,sett, rep, kilo);
+				logger.add(logg);
 				
 			}
 			
