@@ -18,16 +18,7 @@ public class Logg implements ActiveDomainObject{
 	//private int økt_id;
 	private int øvelse_id;
 	private Timestamp logg_tidspunkt;
-	
-//	public Logg(Øvelse øvelse, Timestamp logg_tidspunkt, int sett, int rep, int kilo) {
-//		this.øvelse = øvelse;
-//		this.øvelse_id = øvelse.getØvelseId();
-//		this.sett = sett;
-//		this.rep = rep;
-//		this.kilo = kilo;
-//		this.logg_tidspunkt = logg_tidspunkt;
-//	}
-	
+
 	public Logg(int øvelse_id,Timestamp logg_tidspunkt, int sett, int rep, int kilo) {
 		this.øvelse_id = øvelse_id;
 		this.sett = sett;
@@ -124,29 +115,23 @@ public class Logg implements ActiveDomainObject{
 		
 	}
 	
-/*	
- * overflødig pga fremmednøkkel tror jeg
+
+ //overflødig pga fremmednøkkel tror jeg
 
 	//denne og liste-metoden må jobbes med
-	public int knyttloggtiløvelse(Timestamp logg_tidspunkt, Connection connection) {
+	public void knyttloggtiløvelse(Timestamp logg_tidspunkt, Connection connection) {
 		try {
 			String SQL = "insert into øvelse_logg values (?,?)";
 			PreparedStatement st = connection.prepareStatement(SQL);
 			st.setTimestamp(1,logg_tidspunkt);
 			st.setInt(2, øvelse_id);
-			
-						//ResultSet rs = st.executeQuery();
-			//int øvelse_id = rs.getInt("øvelse_id"); 
-			//Øvelse øvelse = new Øvelse(øvelse_id);
-			//hvordan kan jeg kjøre slik at jeg får printet?
-			
+			st.execute();
 		}catch (SQLException e) {
 			System.out.println("db error during insert to øvelse_logg.");
 		}
-		return øvelse_id;
 		
 	}
-*/	
+	
 	public static List<Logg> listLogger(int øvelse_id, Connection connection){
 		//har endret metoden fra static til non-static. går det bra?
 		try {
@@ -160,7 +145,7 @@ public class Logg implements ActiveDomainObject{
 				int rep = rs.getInt("rep");
 				int kilo = rs.getInt("kilo");
 				Timestamp logg_tidspunkt = rs.getTimestamp("logg_tidspunkt");
-				//int øvelse_id = knyttloggtiløvelse(logg_tidspunkt,conn));
+				
 				Logg logg = new Logg(øvelse_id, logg_tidspunkt,sett, rep, kilo);
 				logger.add(logg);
 				
@@ -172,6 +157,8 @@ public class Logg implements ActiveDomainObject{
 		}
 	return null;
 	}
+	
+	
 	
 
 }
