@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Notat implements ActiveDomainObject{
-	private int id;
+	private int økt_id;
 	private String formål;
 	private int opplevelse;
 	private String diverse;
@@ -15,13 +15,18 @@ public class Notat implements ActiveDomainObject{
 	private int prestasjon;
 	
 	
-	public Notat(Treningsøkt treningsøkt) {
+	public Notat(Treningsøkt treningsøkt, String formål, int opplevelse, String diverse, int form, int prestasjon) {
 		this.treningsøkt = treningsøkt;
-		this.id = treningsøkt.getØkt_id();
+		this.økt_id = treningsøkt.getØkt_id();
+		this.formål = formål;
+		this.opplevelse = opplevelse;
+		this.diverse = diverse;
+		this.prestasjon = prestasjon;
+		this.form = form;
 	}
 	
 	public int getId() {
-		return this.id;
+		return this.økt_id;
 	}
 	public String getFormål() {
 		return this.formål;
@@ -56,7 +61,7 @@ public class Notat implements ActiveDomainObject{
 		try {
 			String SQL = "select formål, opplevelse, diverse from notat where økt_id=?";
 			PreparedStatement st = conn.prepareStatement(SQL);
-			st.setInt(1, this.id);
+			st.setInt(1, this.økt_id);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				this.formål = rs.getString("formål");
@@ -89,11 +94,15 @@ public class Notat implements ActiveDomainObject{
 	//legger til en ny instans av objektet i tabellen
 	public void add(Connection conn) {
 		try {
-			String SQL = "insert into notat (formål, opplevelse, diverse) values (?,?,?)";
+			String SQL = "insert into notat (økt_id, formål, opplevelse, diverse, form, prestasjon) values (?,?,?,?,?,?)";
 			PreparedStatement st = conn.prepareStatement(SQL);
-			st.setString(1, this.formål);
-			st.setInt(2, this.opplevelse);
-			st.setString(3, this.diverse);
+			st.setInt(1,this.økt_id);
+			st.setString(2, this.formål);
+			st.setInt(3, this.opplevelse);
+			st.setString(4, this.diverse);
+			st.setInt(5, this.form);
+			st.setInt(6,this.prestasjon);
+			st.execute();
 		} catch (SQLException e) {
 			System.out.println("db error during insertion to notat: " + e.getMessage());
 		}

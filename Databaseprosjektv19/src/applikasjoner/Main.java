@@ -1,15 +1,26 @@
 package applikasjoner;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import modeller.Apparat;
-import modeller.Dbcon;
+import java.sql.Timestamp;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class Main {
+	//Scanner scanner = new Scanner(System.in);
+	
+	//switch();
+	
+	//test av treningsøktcontroller og mål 1
+	
 	public static void main(String[] args) {
+		//String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+		Treningsøktcontroller controller = new Treningsøktcontroller();
+		//controller.addTreningsøkt(new Timestamp(System.currentTimeMillis()), 45);
+		controller.getDatabase();
+		//controller.addNotat(1, "kondisjon", 5, "spinningtime", 4, 5);
+		controller.getBestemteØkter(1);
+	}
+	
+	/*public static void main(String[] args) {
 		Dbcon connection = new Dbcon();
 		
 		System.out.print("hei\n");
@@ -46,5 +57,5 @@ public class Main {
 		} finally {
 //			connection.disconnect();
 		}
-	}
+	}*/
 }
