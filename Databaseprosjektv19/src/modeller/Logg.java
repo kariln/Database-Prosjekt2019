@@ -124,7 +124,9 @@ public class Logg implements ActiveDomainObject{
 		
 	}
 	
-	
+/*	
+ * overflødig pga fremmednøkkel tror jeg
+
 	//denne og liste-metoden må jobbes med
 	public int knyttloggtiløvelse(Timestamp logg_tidspunkt, Connection connection) {
 		try {
@@ -132,8 +134,9 @@ public class Logg implements ActiveDomainObject{
 			PreparedStatement st = connection.prepareStatement(SQL);
 			st.setTimestamp(1,logg_tidspunkt);
 			st.setInt(2, øvelse_id);
-			ResultSet rs = st.executeQuery();
-			int øvelse_id = rs.getInt("øvelse_id"); 
+			
+						//ResultSet rs = st.executeQuery();
+			//int øvelse_id = rs.getInt("øvelse_id"); 
 			//Øvelse øvelse = new Øvelse(øvelse_id);
 			//hvordan kan jeg kjøre slik at jeg får printet?
 			
@@ -143,7 +146,7 @@ public class Logg implements ActiveDomainObject{
 		return øvelse_id;
 		
 	}
-	
+*/	
 	public static List<Logg> listLogger(int øvelse_id, Connection connection){
 		//har endret metoden fra static til non-static. går det bra?
 		try {

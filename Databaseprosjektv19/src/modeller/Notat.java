@@ -87,6 +87,7 @@ public class Notat implements ActiveDomainObject{
 			st.setString(1, this.formål);
 			st.setInt(2, this.opplevelse);
 			st.setString(3, this.diverse);
+			st.execute();
 		} catch (SQLException e) {
 			System.out.println("db error during update of notat: " + e.getMessage());
 		}

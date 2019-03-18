@@ -167,6 +167,19 @@ public class Øvelse implements ActiveDomainObject {
 			System.out.println("db error during insert to øvelse_apparat.");
 		}
 	}
+	
+	public void knyttØvelseTilGruppe(int gruppe_id, Connection conn) {
+		try {
+			String SQL = "insert into øvelse_gruppe values ?,?";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setInt(1, this.øvelse_id);
+			st.setInt(2, gruppe_id);
+			st.execute();
+			
+		} catch(SQLException e) {
+			System.out.println("db error during insertion to øvelse_gruppe" + e.getMessage());
+		}
+	}
 }	
 
 //INSERT INTO table_name (column1, column2, column3, ...)
