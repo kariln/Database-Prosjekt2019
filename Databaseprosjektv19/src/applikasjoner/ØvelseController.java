@@ -101,25 +101,51 @@ public class ØvelseController {
 		}
 	}	
 	
-	public void findLoggInterval(String dato1, String dato2) {
+//	public void findLoggInterval(String dato1, String dato2) {
+//		String s = new String();
+//		try {
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			Date dt1 = new java.sql.Date(sdf.parse(dato1).getTime());
+//			Date dt2 = new java.sql.Date(sdf.parse(dato2).getTime());				
+//		    Timestamp t1 = new Timestamp(dt1.getTime());
+//		    Timestamp t2 = new Timestamp(dt2.getTime());
+//			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN dato_tidspunkt=? AND dato_tidspunkt=?";
+//			PreparedStatement st = connect().prepareStatement(SQL);
+//			st.setTimestamp(1, t1);
+//			st.setTimestamp(2, t2);
+//			st.execute();
+//			ResultSet rs = st.executeQuery();
+//			while (rs.next()) {
+//				s+= "Logger i intervall: " +øvelsesgruppe_id +'\n';
+//			}
+//			System.out.println(s);
+//			
+//		} catch(SQLException | ParseException e) {
+//			System.out.println("db error during selection of logg" + e.getMessage());
+//		}
+//	}
+	
+	public void findLoggIntervall(int N) {
+		String s = new String();
+		int i = 0;
+		s = "De" +  N + "siste loggene:" + '\n';
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date dt1 = null;
-			Date dt2 = null;
-			try {
-				dt1 = new java.sql.Date(sdf.parse(dato1).getTime());
-				dt2 = new java.sql.Date(sdf.parse(dato2).getTime());				
-			} catch (ParseException e) {
-				System.out.println(e);
-			}
-		    //long epoch1 = dt1.getTime();
-		    //long epoch2 = dt2.getTime();
-		    Timestamp t1 = new Timestamp(dt1.getTime());
-		    Timestamp t2 = new Timestamp(dt2.getTime());
-			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN dato_tidspunkt=? AND dato_tidspunkt=?";
+			String SQL = "SELECT * FROM logg ORDER BY dato_tidspunkt DESC LIMIT ?";
 			PreparedStatement st = connect().prepareStatement(SQL);
-			st.setTimestamp(1, t1);
-			st.setTimestamp(2, t2);
+			st.setInt(1,N);
+			st.execute();
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				i = i+1;
+				s += "Den " + i + " siste loggen: ";
+				s += " øvelse_id: " + rs.getInt("øvelse_id");
+				s += " dato_tidspunkt: " + rs.getTimestamp("dato_tidspunkt");
+				s += " sett: " + rs.getInt("sett");
+				s += " repetisjoner: " + rs.getInt("repetisjoner");
+				s += " kg: " + rs.getInt("kg") + '\n';
+			}
+			
+			System.out.println(s);
 		} catch(SQLException e) {
 			System.out.println("db error during selection of logg" + e.getMessage());
 		}
