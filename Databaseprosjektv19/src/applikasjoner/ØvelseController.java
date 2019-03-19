@@ -98,7 +98,17 @@ public class ØvelseController {
 			System.out.println("db error during selection of øvelsegruppe" + e.getMessage());
 		}
 		return s;
-	}	
 	
 	
+	public void findLoggInterval(Timestamp dato1, Timestamp dato2) {
+		try {
+			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN dato_tidspunkt=? AND dato_tidspunkt=?";
+			PreparedStatement st = connect().prepareStatement(SQL);
+			st.setInt
+		} catch(SQLException e) {
+			System.out.println("db error during selection of logg" + e.getMessage());
+		}
+	}
+
+	}
 }
