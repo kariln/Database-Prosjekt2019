@@ -128,7 +128,6 @@ public class Øvelse implements ActiveDomainObject {
 			
 			// rs = result
 			while(rs.next()) {
-				//System.out.println(rs.getInt("øvelse_id"));
 				System.out.print(rs.getInt(1) + " ");
 				System.out.print(rs.getString(2) + "\t ");
 				System.out.print(rs.getString(3) + "\t ");
@@ -189,8 +188,3 @@ public class Øvelse implements ActiveDomainObject {
 		}
 	}
 }
-	
-
-
-//INSERT INTO table_name (column1, column2, column3, ...)
-//VALUES (value1, value2, value3, ...); 
