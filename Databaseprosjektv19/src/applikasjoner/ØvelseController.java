@@ -42,6 +42,12 @@ public class ØvelseController {
 			System.out.println(ele.getØvelseId() + " " + ele.getNavn() + " " + ele.getBeskrivelse() + " " + ele.getFastmontert());
 		}
 	}
+	
+	public void printgruppeList() {
+		for (Øvelsesgruppe ele: øvelsesgrupper) {
+			System.out.println(ele.getId() + " " + ele.getNavn() + " " +ele.getBeskrivelse());
+		}
+	}
 	public void addNewØvelse(String navn, String beskrivelse, boolean fastmontert) {
 		int id = øvelse.size()+1;
 		Øvelse nytt = new Øvelse(id, navn, beskrivelse, fastmontert);
