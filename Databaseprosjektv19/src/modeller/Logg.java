@@ -1,9 +1,5 @@
 package modeller;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -25,6 +21,12 @@ public class Logg implements ActiveDomainObject{
 		this.rep = rep;
 		this.kilo = kilo;
 		this.logg_tidspunkt = logg_tidspunkt;
+	}
+	
+	public Logg(int sett, int rep, int kilo) {
+		this.sett = sett;
+		this.rep = rep;
+		this.kilo = kilo;
 	}
 	
 	public String toString() {
@@ -132,7 +134,8 @@ public class Logg implements ActiveDomainObject{
 		
 	}
 	
-	public static List<Logg> listLogger(int øvelse_id, Connection connection){
+	//hvordan bruker jeg knyttloggogøvelse til listlogg
+	public static List<Logg> listLogger(Connection connection){
 		//har endret metoden fra static til non-static. går det bra?
 		try {
 			String SQL = "Select * from Logg";
@@ -145,6 +148,7 @@ public class Logg implements ActiveDomainObject{
 				int rep = rs.getInt("rep");
 				int kilo = rs.getInt("kilo");
 				Timestamp logg_tidspunkt = rs.getTimestamp("logg_tidspunkt");
+				int øvelse_id = 
 				
 				Logg logg = new Logg(øvelse_id, logg_tidspunkt,sett, rep, kilo);
 				logger.add(logg);
@@ -158,7 +162,10 @@ public class Logg implements ActiveDomainObject{
 	return null;
 	}
 	
-	
+	public static Timestamp getTimestamp() {
+		Timestamp tid = new Timestamp(System.currentTimeMillis());
+		return tid;
+	}
 	
 
 }
