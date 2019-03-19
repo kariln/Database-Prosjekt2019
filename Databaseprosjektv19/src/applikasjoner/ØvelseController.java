@@ -31,6 +31,7 @@ public class ØvelseController {
 	private void refresh() {
 		øvelse.clear();
 		øvelse = Øvelse.listØvelser(connect());
+		øvelsesgrupper = Øvelsesgruppe.listØvelsesgrupper(connect());
 	}
 	
 	public ØvelseController() {
@@ -107,31 +108,33 @@ public class ØvelseController {
 		}
 	}	
 	
-//	public void findLoggInterval(String dato1, String dato2) {
-//		String s = new String();
-//		try {
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//			Date dt1 = new java.sql.Date(sdf.parse(dato1).getTime());
-//			Date dt2 = new java.sql.Date(sdf.parse(dato2).getTime());				
-//		    Timestamp t1 = new Timestamp(dt1.getTime());
-//		    Timestamp t2 = new Timestamp(dt2.getTime());
-//			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN dato_tidspunkt=? AND dato_tidspunkt=?";
-//			PreparedStatement st = connect().prepareStatement(SQL);
-//			st.setTimestamp(1, t1);
-//			st.setTimestamp(2, t2);
-//			st.execute();
-//			ResultSet rs = st.executeQuery();
-//			while (rs.next()) {
-//				s+= "Logger i intervall: " +øvelsesgruppe_id +'\n';
-//			}
-//			System.out.println(s);
-//			
-//		} catch(SQLException | ParseException e) {
-//			System.out.println("db error during selection of logg" + e.getMessage());
-//		}
-//	}
+	public void findLoggInterval(int øvelse_id, String dato1, String dato2) {
+		String s = new String();
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date dt1 = new java.sql.Date(sdf.parse(dato1).getTime());
+			Date dt2 = new java.sql.Date(sdf.parse(dato2).getTime());				
+		    Timestamp t1 = new Timestamp(dt1.getTime());
+		    Timestamp t2 = new Timestamp(dt2.getTime());
+			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN ? AND ? AND øvelse_id =?";
+			PreparedStatement st = connect().prepareStatement(SQL);
+			st.setTimestamp(1, t1);
+			st.setTimestamp(2, t2);
+			st.setInt(3, øvelse_id);
+			st.execute();
+			ResultSet rs = st.executeQuery();
+			s+= "Logger knyttet til øvelsen i angitt tidsperiode:\n";
+			while (rs.next()) {
+				s+= "Logg til øvelse: " +rs.getString("øvelse_id") + ", sett: " + rs.getInt("sett") + ", repetisjoner: " +rs.getInt("repetisjoner")+", kilo:" +rs.getInt("kg")+'\n';
+			}
+			System.out.println(s);
+			
+		} catch(SQLException | ParseException e) {
+			System.out.println("db error during selection of logg" + e.getMessage());
+		}
+	}
 	
-	public void findLoggIntervall(int N) {
+/*	public void findLoggIntervall(int N) {
 		String s = new String();
 		int i = 0;
 		s = "De" +  N + "siste loggene:" + '\n';
@@ -155,7 +158,7 @@ public class ØvelseController {
 		} catch(SQLException e) {
 			System.out.println("db error during selection of logg" + e.getMessage());
 		}
-	}
+	}*/
 	
 
 }
