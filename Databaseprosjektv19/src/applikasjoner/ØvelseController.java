@@ -41,7 +41,7 @@ public class ØvelseController {
 	
 	public void printList() {
 		for(Øvelse ele : øvelse) {
-			System.out.println(ele.getØvelseId() + " " + ele.getNavn() + " " + ele.getBeskrivelse() + " " + ele.getFastmontert());
+			System.out.println(ele.getØvelseId() + " " + ele.getNavn() + " " + ele.getBeskrivelse() + "Fastmontert? " + ele.getFastmontert());
 		}
 	}
 	
@@ -124,8 +124,9 @@ public class ØvelseController {
 			st.setInt(3, øvelse_id);
 			st.execute();
 			ResultSet rs = st.executeQuery();
-			s+= "Logger knyttet til øvelsen i angitt tidsperiode:\n";
+			
 			while (rs.next()) {
+				s+= "Logger knyttet til øvelsen i angitt tidsperiode:\n";
 				s+= "Logg til øvelse: " +rs.getString("øvelse_id") + ", sett: " + rs.getInt("sett") + ", repetisjoner: " +rs.getInt("repetisjoner")+", kilo:" +rs.getInt("kg")+'\n';
 			}
 			System.out.println(s);
