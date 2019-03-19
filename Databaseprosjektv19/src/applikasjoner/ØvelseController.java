@@ -125,28 +125,5 @@ public class ØvelseController {
 		}
 	}
 	
-	public void findTreningsmengde(String dato1, String dato2) {
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date dt1 = null;
-			Date dt2 = null;
-			try {
-				dt1 = new java.sql.Date(sdf.parse(dato1).getTime());
-				dt2 = new java.sql.Date(sdf.parse(dato2).getTime());				
-			} catch (ParseException e) {
-				System.out.println(e);
-			}
-		    //long epoch1 = dt1.getTime();
-		    //long epoch2 = dt2.getTime();
-		    Timestamp t1 = new Timestamp(dt1.getTime());
-		    Timestamp t2 = new Timestamp(dt2.getTime());
-			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN dato_tidspunkt=? AND dato_tidspunkt=?";
-			PreparedStatement st = connect().prepareStatement(SQL);
-			st.setTimestamp(1, t1);
-			st.setTimestamp(2, t2);
-		} catch(SQLException e) {
-			System.out.println("db error during selection of logg" + e.getMessage());
-		}
-	}
 
 }
