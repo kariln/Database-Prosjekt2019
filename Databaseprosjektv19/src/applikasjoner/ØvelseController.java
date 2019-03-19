@@ -52,14 +52,15 @@ public class ØvelseController {
 	public Øvelse getØvelse(int øvelse_id) {
 		return øvelse.get(øvelse_id-1);
 	}
+
 	
-	//Går det greit at jeg tar inn øvelse_id på denne måten? 
-	//hvordan bruker jeg knytteren med denne?
-	public static void addLogg(int øvelse_id, Timestamp logg_tidspunkt, int sett, int rep, int kilo, Connection connection) {
+	public void addLogg(int øvelse_id, Timestamp logg_tidspunkt, int sett, int rep, int kilo, Connection connection) {
 		//Logg.knyttloggtiløvelse(logg_tidspunkt, connection);
 		Logg ny_logg = new Logg(øvelse_id,logg_tidspunkt,sett,rep,kilo);
 		ny_logg.add(connection);
-		//refresh();
+		//ny_logg.refresh(connection);
+		//ny_logg.save(connection);
+		
 	}
 
 	// legge til en ny øvelsesgruppe

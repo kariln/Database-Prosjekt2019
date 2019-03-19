@@ -82,7 +82,7 @@ public class Logg implements ActiveDomainObject{
 				this.øvelse_id = rs.getInt("øvelse_id");
 				this.dato_tidspunkt = rs.getTimestamp("dato_tidspunkt");
 				this.sett = rs.getInt("sett");
-				this.repetisjoner = rs.getInt("repetisjon");
+				this.repetisjoner = rs.getInt("repetisjoner");
 				this.kg = rs.getInt("kg");
 			}
 		}catch (SQLException e) {
