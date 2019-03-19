@@ -219,6 +219,16 @@ public class Main3 {
 		tre.findTreningsmengde(fra, til);
 	}
 	public static void hvisResultatForØvelse() {
+		System.out.print("Resultat for øvelse: \n");
+		ØvelseController ov = new ØvelseController();
+		ov.printList();
+		System.out.print("Skriv inn øvelses-id");
+		int ovid = scanInt();
+		System.out.print("Oppgi fra dato på formatet 'yyyy-MM-dd HH:mm:ss' \n");
+		String fra = scanString();
+		System.out.print("Oppgi til dato på formatet 'yyyy-MM-dd HH:mm:ss' \n");
+		String til = scanString();
+		ov.findLoggInterval(ovid, fra, til);
 		
 	}
 }
