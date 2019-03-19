@@ -2,20 +2,16 @@ package applikasjoner;
 
 import java.util.List;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import modeller.Øvelse;
-import modeller.Øvelsesgruppe;
 import modeller.Apparat;
 import modeller.Dbcon;
 import modeller.Logg;
 
 public class ØvelseController {
-	private List<Øvelse> øvelse = new ArrayList<>();
-	private List<Øvelsesgruppe> øvelsesgrupper = new ArrayList<>();
+	List<Øvelse> øvelse = new ArrayList<>();
 	
 	Dbcon connection = new Dbcon();
 	
@@ -44,7 +40,6 @@ public class ØvelseController {
 		Øvelse nytt = new Øvelse(id, navn, beskrivelse, fastmontert);
 		// Legger til i database.
 		nytt.add(connect());
-		øvelse.add(nytt);
 		refresh();
 	}
 	
@@ -53,50 +48,13 @@ public class ØvelseController {
 		return øvelse.get(øvelse_id-1);
 	}
 	
-	public void addLogg(int øvelse_id,Timestamp logg_tidspunkt, int sett, int rep, int kilo) {
-		connection.connect();
-		Connection connect = connection.getConnection();
+	//Går det greit at jeg tar inn øvelse_id på denne måten? 
+	//hvordan bruker jeg knytteren med denne?
+	public static void addLogg(int øvelse_id, Timestamp logg_tidspunkt, int sett, int rep, int kilo, Connection connection) {
+		//Logg.knyttloggtiløvelse(logg_tidspunkt, connection);
 		Logg ny_logg = new Logg(øvelse_id,logg_tidspunkt,sett,rep,kilo);
-		ny_logg.add(connect);
-		//ny_logg.knyttloggtiløvelse(new Timestamp(System.currentTimeMillis()), connect);
+		ny_logg.add(connection);
+		//refresh();
 	}
-	//hvordan skal jeg bruke metoden for å knytte ting sammen? 
-	
-
-	
-	// legge til en ny øvelsesgruppe
-	
-	public void addØvelsesgruppe(String navn, String beskrivelse) {
-		int øvelsesgruppe_id = øvelsesgrupper.size()+1;
-		Øvelsesgruppe ny = new Øvelsesgruppe(øvelsesgruppe_id, navn, beskrivelse);
-		ny.add(connect());
-		øvelsesgrupper.add(ny);
-	}
-
-	//legge til øvelse i gruppe
-	public void addØvelseTilGruppe(int øvelse_id, int gruppe_id) {
-		//legger til i tabellen øvelse_gruppe
-		//forutsetter at gruppenummer er kjent
-		getØvelse(øvelse_id).knyttØvelseTilGruppe(gruppe_id, connect());
-	}
-	
-	//finne øvelser som er i samme gruppe
-	
-	public String getØvelserGruppe(int øvelsesgruppe_id) {
-		String s = new String();
-		try {
-			String SQL = "select øvelse.øvelse_id, øvelse.navn from øvelse join øvelse_gruppe on øvelse.øvelse_id = øvelse_gruppe.øvelse_id where øvelse_gruppe.øvelsesgruppe_id=? ";
-			PreparedStatement st =connect().prepareStatement(SQL);
-			st.setInt(1, øvelsesgruppe_id);
-			ResultSet rs = st.executeQuery();
-			while (rs.next()) {
-				s += "Øvelsesid: " + rs.getInt("øvelse_id");
-				s+= "Navn på øvelse: " + rs.getString("navn") +'\n'; 
-			}
-			
-		} catch(SQLException e) {
-			System.out.println("db error during selection of øvelsegruppe" + e.getMessage());
-		}
-		return s;
-	}
+	 
 }
