@@ -13,14 +13,20 @@ public class Main {
 	
 	public static void main(String[] args) {
 		//String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		Treningsøktcontroller controller = new Treningsøktcontroller();
-		controller.getDatabase();
+//		Treningsøktcontroller controller = new Treningsøktcontroller();
+//		controller.getDatabase();
 //		controller.addTreningsøkt(new Timestamp(System.currentTimeMillis()), 45);
 //		controller.addNotat(5, "kondisjon", 5, "spinningtime", 4, 5);
 //		controller.addTreningsøkt(new Timestamp(System.currentTimeMillis()), 30);
 //		controller.addNotat(6, "noe", 10, "kult", 3, 1);
-		controller.getBestemteØkter(6);
+//		controller.getBestemteØkter(6);
 		
+		ØvelseController øvelse = new ØvelseController();
+//		øvelse.addØvelsesgruppe("trening", "er gøy");
+//		øvelse.addØvelseTilGruppe(2, 1);
+//		øvelse.addØvelseTilGruppe(3, 1);
+		
+		øvelse.getØvelserGruppe(1);
 	}
 	
 }

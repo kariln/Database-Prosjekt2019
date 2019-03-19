@@ -9,19 +9,35 @@ import java.util.Scanner;
 import modeller.Apparat;
 import modeller.Dbcon;
 import modeller.Øvelse;
+import applikasjoner.ApparatController;
+
+//Scanner in = new Scanner(System.in); 
+//String s = in.nextLine(); 
+//System.out.println("You entered string "+s); 
+
 
 public class Main3 {
+	
 	private static String scanString() {
 		Scanner reader = new Scanner(System.in);
-		String scannedString = reader.next();
-		reader.close();
+//		reader.nextLine();
+		String scannedString = reader.nextLine();
+//		scanClear();
 		return scannedString;
+		
 	}
 	private static int scanInt() {
 		Scanner reader = new Scanner(System.in);
 		int scannedInt = reader.nextInt();
-		reader.close();
+		//reader.close();
+//		scanClear();
 		return scannedInt;
+	}
+	private static void scanClear() {
+		Scanner scanner = new Scanner(System.in);
+		while (scanner.hasNext()) {
+			scanner.next();
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -30,6 +46,30 @@ public class Main3 {
 		System.out.print("Velkommet til \nTrenigsdagbok\n");
 		
 //		System.out.print(scanString());
+		start();
+		
+	}
+	
+	public static void regApp() {
+		
+
+	}
+	public static void regØvelse() {
+		System.out.print("Vi registrerer en øvelse :) \n");
+		ØvelseController app1 = new ØvelseController();
+		
+		System.out.print("Skriv inn navn: \\n");
+		String navn2 = scanString();
+		System.out.print("Skriv inn beskrivelse: ");
+		String beskrivelse = scanString();
+		System.out.print("Er øvelsen fastmontert? Ja -> 1, Nei -> 0 :");
+		int fastmontertInt = scanInt();
+		boolean fastmontertBool = false;	
+		if(fastmontertInt == 1) {
+			fastmontertBool = true;
+		}
+		app1.addNewØvelse(navn2, beskrivelse, fastmontertBool);
+		System.out.print("Øvelsen er lagt til.\n");
 		start();
 		
 	}
@@ -46,10 +86,11 @@ public class Main3 {
 		
 		int a = scanInt();
 		switch (a) {
-		case 1: a = 1;
+		case 1: // Reg apparat.
 			regApp();
 			break;
-		case 2: a = 2;
+		case 2: // Reg øvelse
+			regØvelse();
 			break;
 		default:
 			System.out.print("Ugyldig valg.");
@@ -57,11 +98,7 @@ public class Main3 {
 			break;
 		}
 	}
-	public static void regApp() {
-		System.out.print("Vi registrerer apparat");
-		
-		
-	}
+
 		
 ////		Apparat app1 = new Apparat(1);
 //		ØvelseController app1 = new ØvelseController();

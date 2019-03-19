@@ -188,7 +188,9 @@ public class Øvelse implements ActiveDomainObject {
 			System.out.println("db error during insertion to øvelse_gruppe" + e.getMessage());
 		}
 	}
-}	
+}
+	
+
 
 //INSERT INTO table_name (column1, column2, column3, ...)
 //VALUES (value1, value2, value3, ...); 
