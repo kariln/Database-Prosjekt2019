@@ -23,13 +23,14 @@ public class Logg implements ActiveDomainObject{
 		this.dato_tidspunkt = logg_tidspunkt;
 	}
 	
+	/*
 	public Logg(Øvelse øvelse, Treningsøkt treningsøkt, int sett, int rep, int kilo) {
 		this.øvelse_id = øvelse.getØvelseId();
 		this.sett = sett;
 		this.repetisjoner = rep; 
 		this.kg = kilo;
 		this.dato_tidspunkt = treningsøkt.getTid();
-	}
+	}*/
 	
 	public String toString() {
 		return "Øvelse:" + this.øvelse_id + "Kilo:" + this.kg + "Repetisjon:" + this.repetisjoner + "Sett:" + this.sett;
@@ -82,7 +83,7 @@ public class Logg implements ActiveDomainObject{
 				this.øvelse_id = rs.getInt("øvelse_id");
 				this.dato_tidspunkt = rs.getTimestamp("dato_tidspunkt");
 				this.sett = rs.getInt("sett");
-				this.repetisjoner = rs.getInt("repetisjon");
+				this.repetisjoner = rs.getInt("repetisjoner");
 				this.kg = rs.getInt("kg");
 			}
 		}catch (SQLException e) {
