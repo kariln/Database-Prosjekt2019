@@ -31,6 +31,7 @@ public class ØvelseController {
 	private void refresh() {
 		øvelse.clear();
 		øvelse = Øvelse.listØvelser(connect());
+		øvelsesgrupper = Øvelsesgruppe.listØvelsesgrupper(connect());
 	}
 	
 	public ØvelseController() {
