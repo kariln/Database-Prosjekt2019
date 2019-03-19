@@ -59,8 +59,8 @@ public class ØvelseController {
 		//Logg.knyttloggtiløvelse(logg_tidspunkt, connection);
 		Logg ny_logg = new Logg(øvelse_id,logg_tidspunkt,sett,rep,kilo);
 		ny_logg.add(connection);
-		//ny_logg.refresh(connection);
-		//ny_logg.save(connection);
+		ny_logg.refresh(connection);
+		ny_logg.save(connection);
 		
 	}
 
