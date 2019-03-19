@@ -1,0 +1,25 @@
+En tekstlig beskrivelse som dokumenterer applikasjonen, levert som PDF.
+Dokumentasjonen skal inneholde
+i) En oversikt over hvilke klasser som finnes i programmet deres og en
+tilhørende beskrivelse av hvilken oppgave hver klasse løser.
+ii) En oversikt over hvilke use cases som er løst og hvordan de er realisert i
+programmet
+
+
+I programmet har vi to pakker. Applikasjon og modeller. Modeller inneholder klasser som definerer objektene, som er våre tabeller, med getter og setters samt funksjonalitet for å legge til nye objekter. Modeller inneholder også et interface for funksjoner vi mente det var nyttig å ha for objektene. 
+I applikasjon har vi en appratcontroller, en treningsøktcontroller, en øvelsescontroller og en main-fil som realiserer programmet.
+
+Apparatcontroller leser inn data fra apparat-tabellen og oppretter objekter for disse. Den har en refreshfunksjon som oppdaterer objekter, og muligheten for å legge til et nytt apparat der den kaller på apparat-modellen. 
+Treningsøktcontroller leser inn data fra treningsøkt-tabellen, legger til nye treningsøkter, refresher objekter ihht tabeller og tilhørende notater.
+Øvelsescontroller leser inn data fra øvelse-tabellen og øvelsesgruppe-tabellen, refresher objekter ihht tabeller, legger til nye øvelser, notater, øvelsesgrupper og legger til øvelser i øvelsesgrupper.
+
+Apparatcontroller har use caset om å legge til et apparat.
+Treningsøktkontroller har use caset om å hente de n siste øktene sortert på tid vha en metode som kjører en sql spørring som joiner treningsøkt og notat.
+Treningsøktkontroller har use caset om å legge til et nytt apprat. 
+Øvelsescontroller har use caset om å legge til øvelser og tilhørende data. 
+Øvelsescontroller har use caset om å lage øvelsesgrupper, og legge øvelser til i grupper ved hjelp av en spørring som tar inn øvelse og gruppeid. 
+Øvelsescontroller har use caset om å hente ut øvelser som er knyttet til en bestemt øvelsesgruppe ved en selectspørring som joiner øvelse_gruppe og øvelser tabellene.
+Øvelsescontroller har use caset om å for hver enkelt øvelse se en resultatlogg i et gitt tidsintervall.
+Øvelsescontroller har use caset om å telle antall timer man har trent til sammen i et gitt tidsintervall. 
+
+Vi har en mainfil som ved hjelp av switch-statements realiserer programmet. 
