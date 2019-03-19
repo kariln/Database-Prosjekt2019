@@ -61,7 +61,7 @@ public class Treningsøktcontroller {
 		Connection connect = connection.getConnection();
 		String output = new String();
 		try {
-			String SQL = "Select treningsøkt.økt_id, dato_tidspunkt, varighet, formål, opplevelse, diverse, form, prestasjon from treningsøkt join notat on treningsøkt.økt_id = notat.økt_id order by dato_tidspunkt desc LIMIT ?";
+			String SQL = "Select treningsøkt.økt_id, dato_tidspunkt, varighet, formål, opplevelse, diverse, form, prestasjon from treningsøkt left join notat on treningsøkt.økt_id = notat.økt_id order by dato_tidspunkt desc LIMIT ?";
 			PreparedStatement st = connect.prepareStatement(SQL);
 			st.setInt(1, n);
 			ResultSet rs = st.executeQuery();
@@ -76,7 +76,6 @@ public class Treningsøktcontroller {
 				output += ", form: " + rs.getInt("form");
 				output += ", prestasjon: " +rs.getInt("prestasjon") + "\n";
 			}
-			
 			System.out.println(output);
 		} catch (SQLException e) {
 			System.out.println("db error during select from join" + e.getMessage());
