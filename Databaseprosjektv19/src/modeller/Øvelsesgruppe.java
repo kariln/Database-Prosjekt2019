@@ -76,4 +76,29 @@ public class Øvelsesgruppe implements ActiveDomainObject{
 			System.out.println("db error during insertion into øvelsesgruppe: " + e.getMessage());
 		}		
 	}
+	
+	public static List<Øvelsesgruppe> listØvelsesgrupper(Connection conn) {
+		try {
+			String SQL = "SELECT * FROM øvelsesgruppe;";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			ResultSet rs = st.executeQuery();
+			List<Øvelsesgruppe> øvelsesgrupper = new ArrayList<>();
+			
+			while (rs.next()) {
+				int øvelsesgruppe_id = rs.getInt("øvelsesgruppe_id");
+				String navn = rs.getString("navn");
+				String beskrivelse = rs.getString("beskrivelse");
+				// Bruker konstruktøren til øvelse.
+				øvelsesgrupper.add(new Øvelsesgruppe(øvelsesgruppe_id, navn, beskrivelse));
+			}
+			return øvelsesgrupper;
+			
+		} catch (SQLException e) {
+			// Catch me if you can.
+			System.out.println("db error during select from øvelsesgrupper: " + e.getMessage());
+		}
+		return null;
+	}
+	
+	
 }
