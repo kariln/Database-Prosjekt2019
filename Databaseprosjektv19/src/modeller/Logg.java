@@ -100,10 +100,12 @@ public class Logg implements ActiveDomainObject{
 	@Override
 	public void save(Connection connection) {
 		try {
-			String SQL = "update save set øvelse_id=?, dato_tidspunkt=?, sett=?, repetisjoner=?, kg=? WHERE øvelse_id=?";
+			System.out.println("hei");
+			String SQL = "update logg set dato_tidspunkt=?, sett=?, repetisjoner=?, kg=? WHERE øvelse_id=?";
 			PreparedStatement st = connection.prepareStatement(SQL);
 			st.setInt(1, this.øvelse_id);
 			st.setTimestamp(2, this.dato_tidspunkt);
+			System.out.println("hade");
 			st.setInt(3, this.sett);
 			st.setInt(4, this.repetisjoner);
 			st.setInt(5,this.kg);
