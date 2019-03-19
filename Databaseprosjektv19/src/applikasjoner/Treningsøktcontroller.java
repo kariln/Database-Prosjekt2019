@@ -72,7 +72,7 @@ public class Treningsøktcontroller {
 		Connection connect = connection.getConnection();
 		String output = new String();
 		try {
-			String SQL = "Select treningsøkt.økt_id, dato_tidspunkt, varighet, formål, opplevelse, diverse, form, prestasjon from treningsøkt join notat on treningsøkt.økt_id = notat.økt_id order by dato_tidspunkt desc LIMIT ?";
+			String SQL = "Select treningsøkt.økt_id, dato_tidspunkt, varighet, formål, opplevelse, diverse, form, prestasjon from treningsøkt left join notat on treningsøkt.økt_id = notat.økt_id order by dato_tidspunkt desc LIMIT ?";
 			PreparedStatement st = connect.prepareStatement(SQL);
 			st.setInt(1, n);
 			ResultSet rs = st.executeQuery();
