@@ -48,13 +48,14 @@ public class Main3 {
 		System.out.print("Velkommet til \nTrenigsdagbok\n");
 		
 //		System.out.print(scanString());
-		while(true) {
-			start();
+		boolean avslutt = false;
+		while(!avslutt) {
+			avslutt = start(avslutt);
 		}
 		
 	}
 	
-	public static void start() {
+	public static boolean start(boolean avslutt) {
 		System.out.print("Hva vil du gjøre?\n"); // Done
 		System.out.print("[1] Registrer apparater\n"); // Done
 		System.out.print("[2] Registrer øvelse\n"); // Done
@@ -65,6 +66,7 @@ public class Main3 {
 		System.out.print("[7] Hvis øvelser i en gruppe \n"); // Done
 		System.out.print("[8] Hvis total treningstid innenfor et intervall \n"); // Done
 		System.out.print("[9] Hvis resultat for hver enkelt øvelse \n");
+		System.out.print("[0] Avslutt");
 		System.out.print("\n");
 		
 		
@@ -97,11 +99,15 @@ public class Main3 {
 		case 9:
 			hvisResultatForØvelse();
 			break;
+		case 0:
+			avslutt = true;
+			return avslutt;
 			
 		default:
 			System.out.print("Ugyldig valg.");
 			break;
 		}
+		return avslutt;
 	}
 	
 	public static void regApp() { // Apparat
