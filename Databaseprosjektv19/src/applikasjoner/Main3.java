@@ -9,7 +9,9 @@ import java.util.Scanner;
 import modeller.Apparat;
 import modeller.Dbcon;
 import modeller.Øvelse;
+import modeller.Treningsøkt;
 import applikasjoner.ApparatController;
+import applikasjoner.Treningsøktcontroller;
 
 //Scanner in = new Scanner(System.in); 
 //String s = in.nextLine(); 
@@ -56,10 +58,11 @@ public class Main3 {
 		System.out.print("Hva vil du gjøre?\n"); // Done
 		System.out.print("[1] Registrer apparater\n"); // Done
 		System.out.print("[2] Registrer øvelse\n"); // Done
-		System.out.print("[3] Knytt øvelse til apparat\n"); // TODO
-		System.out.print("[4] Registrer treningsøkt\\n"); // TODO
-		System.out.print("[5] Registrer \n");
-		System.out.print("[6] Registrer \n");
+		System.out.print("[3] Knytt øvelse til apparat\n"); // Done
+		System.out.print("[4] Registrer treningsøkt\n"); // Done
+		System.out.print("[5] Gi meg de n siste treningsøktene\n"); // Done
+		System.out.print("[6] Lag øvelsesgruppe \n"); // TODO
+		System.out.print("[7] Hvis øvelser i en gruppe \n");
 		System.out.print("\n");
 		
 		
@@ -76,6 +79,12 @@ public class Main3 {
 			break;
 		case 4: // RegTreningsøkt
 			RegTreningsøkt();
+			break;
+		case 5: // Hvis N siste økter
+			NSisteØkter();
+			break;
+		case 6: // Lag øvelsesgruppe
+			lagØvelsesgruppe();
 			break;
 		default:
 			System.out.print("Ugyldig valg.");
@@ -132,10 +141,52 @@ public class Main3 {
 		Treningsøktcontroller tre = new Treningsøktcontroller();
 		System.out.print("Skriv inn varighet: \n");
 		
-		tre.addTreningsøkt(tid, varighet);
+		int varighet = scanInt();
+		tre.addTreningsøkt(varighet);
 		
+		System.out.print("Vil du legge til et notat til økten? Ja -> 1, Nei -> 0\n");
+		int yesno = scanInt();
+		
+		if( yesno == 1 ) {
+			System.out.print("Skriv inn formål: \n");
+			String formål = scanString();
+			System.out.print("Skriv inn opplevelse (tall 1-10)\n");
+			int opplevelse = scanInt();
+			System.out.print("Skriv inn diverse\n");
+			String diverse = scanString();
+			System.out.print("Skriv inn form (tall 1-10)\n");
+			int form = scanInt();
+			System.out.print("Skriv inn prestasjon (tall 1-10)\n");
+			int prestasjon = scanInt();
+			
+			
+			int sisteØkt = (tre.getTreningsøkter().get(tre.getTreningsøkter().size()-1)).getØkt_id();
+			
+			tre.addNotat(sisteØkt, formål, opplevelse, diverse, form, prestasjon);
+			System.out.print("Økt og notat registrert \n");
+		} else {
+			System.out.print("Økt registrert \n");
+		}
 		
 		System.out.print("");
+	}
+	public static void NSisteØkter() {
+		System.out.print("Tast inn de n siste øktene du ønsker å vise: \n");
+		int n = scanInt();
+		
+		Treningsøktcontroller tre = new Treningsøktcontroller();
+		
+		tre.getBestemteØkter(n);
+	}
+	public static void lagØvelsesgruppe() {
+		System.out.print("Legger til øvelsesgruppe. \n");
+		System.out.print("Skriv et navn : \n");
+		String navn = scanString();
+		System.out.print("Skriv inn beskrivelse: \n");
+		String beskrivelse = scanString();
+		ØvelseController ov = new ØvelseController();
+		ov.addØvelsesgruppe(navn, beskrivelse);
+		
 	}
 
 		

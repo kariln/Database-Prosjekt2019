@@ -18,6 +18,14 @@ public class Treningsøktcontroller {
 	
 	Dbcon connection = new Dbcon();
 	
+	Treningsøktcontroller() {
+		getDatabase();
+	}
+	
+	public List<Treningsøkt> getTreningsøkter() {
+		return this.treningsøkter;
+	}
+	
 	//init
 	public void getDatabase() {
 		connection.connect();
@@ -99,16 +107,20 @@ public class Treningsøktcontroller {
 			} catch (ParseException e) {
 				System.out.println(e);
 			}
-		    //long epoch1 = dt1.getTime();
-		    //long epoch2 = dt2.getTime();
 		    Timestamp t1 = new Timestamp(dt1.getTime());
 		    Timestamp t2 = new Timestamp(dt2.getTime());
-			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN dato_tidspunkt=? AND dato_tidspunkt=?";
+			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN ? AND ?";
 			PreparedStatement st = connect.prepareStatement(SQL);
 			st.setTimestamp(1, t1);
 			st.setTimestamp(2, t2);
-		} catch(SQLException e) {
-			System.out.println("db error during selection of logg" + e.getMessage());
+			ResultSet rs = st.executeQuery();
+			if (rs.next()){
+				System.out.println("Antall minutter trent: " + rs.getInt(1));
+			} else {
+				System.out.println("Ingen treningsøkter registrert i perioden");
+				}
+			} catch(SQLException e) {
+			System.out.println("db error during selection of logg: " + e.getMessage());
 		}
 	}
 	
