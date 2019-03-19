@@ -11,9 +11,6 @@ public class Øvelsesgruppe implements ActiveDomainObject{
 	private int øvelsesgruppe_id;
 	private String navn;
 	private String beskrivelse;
-	//driter i dette og bruker sql isteden
-	//private List<Øvelse> øvelser = new ArrayList<>();
-	
 	
 	public Øvelsesgruppe(int øvelsesgruppe_id, String navn, String beskrivelse) {
 		this.øvelsesgruppe_id = øvelsesgruppe_id;
@@ -88,7 +85,6 @@ public class Øvelsesgruppe implements ActiveDomainObject{
 				int øvelsesgruppe_id = rs.getInt("øvelsesgruppe_id");
 				String navn = rs.getString("navn");
 				String beskrivelse = rs.getString("beskrivelse");
-				// Bruker konstruktøren til øvelse.
 				øvelsesgrupper.add(new Øvelsesgruppe(øvelsesgruppe_id, navn, beskrivelse));
 			}
 			return øvelsesgrupper;
@@ -99,6 +95,4 @@ public class Øvelsesgruppe implements ActiveDomainObject{
 		}
 		return null;
 	}
-	
-	
 }

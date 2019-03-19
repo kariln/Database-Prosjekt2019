@@ -107,8 +107,6 @@ public class Treningsøktcontroller {
 			} catch (ParseException e) {
 				System.out.println(e);
 			}
-		    //long epoch1 = dt1.getTime();
-		    //long epoch2 = dt2.getTime();
 		    Timestamp t1 = new Timestamp(dt1.getTime());
 		    Timestamp t2 = new Timestamp(dt2.getTime());
 			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN ? AND ?";
