@@ -46,39 +46,18 @@ public class Main3 {
 		System.out.print("Velkommet til \nTrenigsdagbok\n");
 		
 //		System.out.print(scanString());
-		start();
+		while(true) {
+			start();
+		}
 		
 	}
 	
-	public static void regApp() {
-		
-
-	}
-	public static void regØvelse() {
-		System.out.print("Vi registrerer en øvelse :) \n");
-		ØvelseController app1 = new ØvelseController();
-		
-		System.out.print("Skriv inn navn: \\n");
-		String navn2 = scanString();
-		System.out.print("Skriv inn beskrivelse: ");
-		String beskrivelse = scanString();
-		System.out.print("Er øvelsen fastmontert? Ja -> 1, Nei -> 0 :");
-		int fastmontertInt = scanInt();
-		boolean fastmontertBool = false;	
-		if(fastmontertInt == 1) {
-			fastmontertBool = true;
-		}
-		app1.addNewØvelse(navn2, beskrivelse, fastmontertBool);
-		System.out.print("Øvelsen er lagt til.\n");
-		start();
-		
-	}
 	public static void start() {
-		System.out.print("Hva vil du gjøre?\n"); // TODO
-		System.out.print("[1] Registrer apparater\n"); // TODO
-		System.out.print("[2] Registrer øvelse\n"); // TODO
-		System.out.print("[3] Registrer treningsøkt\n"); // TODO
-		System.out.print("[4] Registrer \n"); // TODO
+		System.out.print("Hva vil du gjøre?\n"); // Done
+		System.out.print("[1] Registrer apparater\n"); // Done
+		System.out.print("[2] Registrer øvelse\n"); // Done
+		System.out.print("[3] Knytt øvelse til apparat\n"); // TODO
+		System.out.print("[4] Registrer treningsøkt\\n"); // TODO
 		System.out.print("[5] Registrer \n");
 		System.out.print("[6] Registrer \n");
 		System.out.print("\n");
@@ -92,11 +71,71 @@ public class Main3 {
 		case 2: // Reg øvelse
 			regØvelse();
 			break;
+		case 3: // Knytt øvelse til apparat
+			knyttØvelseTilApparat();
+			break;
+		case 4: // RegTreningsøkt
+			RegTreningsøkt();
+			break;
 		default:
 			System.out.print("Ugyldig valg.");
-			start();
 			break;
 		}
+	}
+	
+	public static void regApp() { // Apparat
+		System.out.print("Vi registrere et apparat.\n");
+		ApparatController app1 = new ApparatController();
+		System.out.print("Skriv inn navn: \n");
+		String navn = scanString();
+		System.out.print("Skriv inn brukerinstruks: \n");
+		String brukerinstruks = scanString();
+		app1.addApparat(navn, brukerinstruks);
+		
+
+	}
+	public static void regØvelse() {
+		System.out.print("Vi registrerer en øvelse :) \n");
+		ØvelseController app1 = new ØvelseController();
+		
+		System.out.print("Skriv inn navn: \n");
+		String navn2 = scanString();
+		System.out.print("Skriv inn beskrivelse: ");
+		String beskrivelse = scanString();
+		System.out.print("Er øvelsen fastmontert? Ja -> 1, Nei -> 0 :");
+		int fastmontertInt = scanInt();
+		boolean fastmontertBool = false;	
+		if(fastmontertInt == 1) {
+			fastmontertBool = true;
+		}
+		app1.addNewØvelse(navn2, beskrivelse, fastmontertBool);
+		System.out.print("Øvelsen er lagt til.\n");
+		
+	}
+	public static void knyttØvelseTilApparat() {
+		System.out.print("Vi knytter en øvelse til et apparat.\n");
+		ApparatController app = new ApparatController();
+		ØvelseController ov = new ØvelseController();
+		System.out.print("Liste over apparater \n------------------ \n");
+		System.out.print(app.toString());
+		System.out.print("Liste over øvelser \n------------------ \n");
+		ov.printList();
+		System.out.print("Skriv inn id-en på apparatet du vil knytte til øvelse\n");
+		int appId = scanInt();
+		System.out.print("Skriv inn id-en på øvelsen du ønsker å knytte til apparatet.\n");
+		int ovId = scanInt();
+		ov.addØvelseTilGruppe(appId, ovId);
+	}
+	public static void RegTreningsøkt() {
+		System.out.print("Vi registrerer en treningsøkt.\n");
+		
+		Treningsøktcontroller tre = new Treningsøktcontroller();
+		System.out.print("Skriv inn varighet: \n");
+		
+		tre.addTreningsøkt(tid, varighet);
+		
+		
+		System.out.print("");
 	}
 
 		

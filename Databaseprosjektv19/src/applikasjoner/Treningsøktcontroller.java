@@ -25,7 +25,7 @@ public class Treningsøktcontroller {
 		treningsøkter = Treningsøkt.listTreningsøkter(connect);
 	}
 	//legge til treningsøkt med tilhørende data
-	public void addTreningsøkt(Timestamp tid, int varighet) {
+	public void addTreningsøkt(int varighet) {
 		connection.connect();
 		Connection connect = connection.getConnection();
 		int øvelse_id = treningsøkter.size()+1;

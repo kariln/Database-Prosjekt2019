@@ -10,6 +10,10 @@ public class ApparatController{
 	private List<Apparat> apparater = new ArrayList<>();
 
 	Dbcon connection = new Dbcon();
+	
+	ApparatController() {
+		getDatabase();
+	}
 
 	public void getDatabase() {
 		connection.connect();
