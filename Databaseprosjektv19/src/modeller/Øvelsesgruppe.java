@@ -15,7 +15,7 @@ public class Øvelsesgruppe implements ActiveDomainObject{
 	//private List<Øvelse> øvelser = new ArrayList<>();
 	
 	
-	public Øvelsesgruppe(int øvelses_id, String navn, String beskrivelse) {
+	public Øvelsesgruppe(int øvelsesgruppe_id, String navn, String beskrivelse) {
 		this.øvelsesgruppe_id = øvelsesgruppe_id;
 		this.navn = navn;
 		this.beskrivelse= beskrivelse;
