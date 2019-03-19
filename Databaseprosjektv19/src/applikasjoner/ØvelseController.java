@@ -48,7 +48,6 @@ public class ØvelseController {
 		refresh();
 	}
 	
-	//legger til logg
 	public Øvelse getØvelse(int øvelse_id) {
 		return øvelse.get(øvelse_id-1);
 	}
@@ -81,7 +80,7 @@ public class ØvelseController {
 
 	//finne øvelser som er i samme gruppe
 
-	public String getØvelserGruppe(int øvelsesgruppe_id) {
+	public void getØvelserGruppe(int øvelsesgruppe_id) {
 		String s = new String();
 		try {
 			String SQL = "select øvelse.øvelse_id, øvelse.navn from øvelse join øvelse_gruppe on øvelse.øvelse_id = øvelse_gruppe.øvelse_id where øvelse_gruppe.øvelsesgruppe_id=? ";
@@ -89,14 +88,14 @@ public class ØvelseController {
 			st.setInt(1, øvelsesgruppe_id);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
+				s+= "Øvelser i øvelsesgruppe: " +øvelsesgruppe_id +'\n';
 				s += "Øvelsesid: " + rs.getInt("øvelse_id");
-				s+= "Navn på øvelse: " + rs.getString("navn") +'\n'; 
+				s += " Navn på øvelse: " + rs.getString("navn") +'\n'; 
 			}
-
+			System.out.println(s);
 		} catch(SQLException e) {
 			System.out.println("db error during selection of øvelsegruppe" + e.getMessage());
 		}
-		return s;
 	}	
 	
 	
