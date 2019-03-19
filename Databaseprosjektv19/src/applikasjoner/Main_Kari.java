@@ -44,14 +44,14 @@ public class Main_Kari {
 //		System.out.println("Logg2:" + logg2);
 //		logg1.initialize(connect);
 //		logg1.add(connect);
-		controller.addLogg(1, tid, 1, 2, 3, connect);
-		controller.addLogg(2, tid, 2, 2, 2, connect);
+//		controller.addLogg(1, tid, 1, 2, 3, connect);
+//		controller.addLogg(2, tid, 2, 2, 2, connect);
 		//System.out.println("linje 37");
 //		
-//		controller.findLoggInterval("2019-03-19 23:59:20", "2019-05-13 23:07:23");
+		controller.findLoggInterval(1,"2012-03-19 23:59:20", "2019-05-13 23:07:23");
 //		controller2.findTreningsmengde("2019-03-19 23:59:20", "2019-05-13 23:07:23");
 //		
-		controller.findLoggIntervall(3);
+//		controller.findLoggIntervall(3);
 	}
 
 }
