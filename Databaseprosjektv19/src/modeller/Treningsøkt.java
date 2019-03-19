@@ -39,6 +39,10 @@ public class Treningsøkt implements ActiveDomainObject{
 		return this.varighet;
 	}
 	
+	public Timestamp getTid() {
+		return dato_tidspunkt;
+	}
+	
 	//implementere init, save og add
 	@Override
 	public void initialize(Connection conn) {

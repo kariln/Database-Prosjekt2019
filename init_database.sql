@@ -51,7 +51,7 @@ CREATE TABLE logg (
   repetisjoner INT,
   kg INT,
   
-  CONSTRAINT logg_FK2 FOREIGN KEY (øvelse_id) REFERENCES øvelse(øvelse_id)
+  CONSTRAINT logg_FK FOREIGN KEY (øvelse_id) REFERENCES øvelse(øvelse_id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
