@@ -18,6 +18,14 @@ public class Treningsøktcontroller {
 	
 	Dbcon connection = new Dbcon();
 	
+	Treningsøktcontroller() {
+		getDatabase();
+	}
+	
+	public List<Treningsøkt> getTreningsøkter() {
+		return this.treningsøkter;
+	}
+	
 	//init
 	public void getDatabase() {
 		connection.connect();
