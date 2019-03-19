@@ -1,13 +1,10 @@
 package modeller;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Treningsøkt implements ActiveDomainObject{
 	private int økt_id;
@@ -118,5 +115,29 @@ public class Treningsøkt implements ActiveDomainObject{
 	
 	public String toString() {
 		return "Treningsøkt: " + this.økt_id + ", dato og tid: " + this.dato_tidspunkt + ", varighet: " + this.varighet;
+	}
+	
+	public void findTreningsmengde(String dato1, String dato2, Connection conn) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date dt1 = null;
+			Date dt2 = null;
+			try {
+				dt1 = new java.sql.Date(sdf.parse(dato1).getTime());
+				dt2 = new java.sql.Date(sdf.parse(dato2).getTime());				
+			} catch (ParseException e) {
+				System.out.println(e);
+			}
+		    //long epoch1 = dt1.getTime();
+		    //long epoch2 = dt2.getTime();
+		    Timestamp t1 = new Timestamp(dt1.getTime());
+		    Timestamp t2 = new Timestamp(dt2.getTime());
+			String SQL = " SELECT SUM(varighet) FROM treningsøkt WHERE dato_tidspunkt BETWEEN dato_tidspunkt=? AND dato_tidspunkt=?";
+			PreparedStatement st = conn.prepareStatement(SQL);
+			st.setTimestamp(1, t1);
+			st.setTimestamp(2, t2);
+		} catch(SQLException e) {
+			System.out.println("db error during selection of logg" + e.getMessage());
+		}
 	}
 }

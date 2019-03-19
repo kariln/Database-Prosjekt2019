@@ -2,10 +2,13 @@ package applikasjoner;
 import modeller.Treningsøkt;
 import java.util.List;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList; 
 import modeller.Dbcon;
 import modeller.Notat;
@@ -69,7 +72,7 @@ public class Treningsøktcontroller {
 		Connection connect = connection.getConnection();
 		String output = new String();
 		try {
-			String SQL = "Select treningsøkt.økt_id, dato_tidspunkt, varighet, formål, opplevelse, diverse, form, prestasjon from treningsøkt left join notat on treningsøkt.økt_id = notat.økt_id order by dato_tidspunkt desc LIMIT ?";
+			String SQL = "Select treningsøkt.økt_id, dato_tidspunkt, varighet, formål, opplevelse, diverse, form, prestasjon from treningsøkt join notat on treningsøkt.økt_id = notat.økt_id order by dato_tidspunkt desc LIMIT ?";
 			PreparedStatement st = connect.prepareStatement(SQL);
 			st.setInt(1, n);
 			ResultSet rs = st.executeQuery();
@@ -84,10 +87,43 @@ public class Treningsøktcontroller {
 				output += ", form: " + rs.getInt("form");
 				output += ", prestasjon: " +rs.getInt("prestasjon") + "\n";
 			}
+			
 			System.out.println(output);
 		} catch (SQLException e) {
 			System.out.println("db error during select from join" + e.getMessage());
 		}
 	}
 
+	public void findTreningsmengde(String dato1, String dato2) {
+		connection.connect();
+		Connection connect = connection.getConnection();
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date dt1 = null;
+			Date dt2 = null;
+			try {
+				dt1 = new java.sql.Date(sdf.parse(dato1).getTime());
+				dt2 = new java.sql.Date(sdf.parse(dato2).getTime());				
+			} catch (ParseException e) {
+				System.out.println(e);
+			}
+		    //long epoch1 = dt1.getTime();
+		    //long epoch2 = dt2.getTime();
+		    Timestamp t1 = new Timestamp(dt1.getTime());
+		    Timestamp t2 = new Timestamp(dt2.getTime());
+			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN ? AND ?";
+			PreparedStatement st = connect.prepareStatement(SQL);
+			st.setTimestamp(1, t1);
+			st.setTimestamp(2, t2);
+			ResultSet rs = st.executeQuery();
+			if (rs.next()){
+				System.out.println("Antall minutter trent: " + rs.getInt(1));
+			} else {
+				System.out.println("Ingen treningsøkter registrert i perioden");
+				}
+			} catch(SQLException e) {
+			System.out.println("db error during selection of logg: " + e.getMessage());
+		}
+	}
+	
 }

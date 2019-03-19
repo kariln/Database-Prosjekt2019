@@ -2,10 +2,13 @@ package applikasjoner;
 
 import java.util.List;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import modeller.Øvelse;
 import modeller.Øvelsesgruppe;
@@ -58,7 +61,7 @@ public class ØvelseController {
 		Logg ny_logg = new Logg(øvelse_id,logg_tidspunkt,sett,rep,kilo);
 		ny_logg.add(connection);
 		ny_logg.refresh(connection);
-		ny_logg.save(connection);
+		//ny_logg.save(connection);
 		
 	}
 
@@ -98,5 +101,29 @@ public class ØvelseController {
 		}
 	}	
 	
+	public void findLoggInterval(String dato1, String dato2) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date dt1 = null;
+			Date dt2 = null;
+			try {
+				dt1 = new java.sql.Date(sdf.parse(dato1).getTime());
+				dt2 = new java.sql.Date(sdf.parse(dato2).getTime());				
+			} catch (ParseException e) {
+				System.out.println(e);
+			}
+		    //long epoch1 = dt1.getTime();
+		    //long epoch2 = dt2.getTime();
+		    Timestamp t1 = new Timestamp(dt1.getTime());
+		    Timestamp t2 = new Timestamp(dt2.getTime());
+			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN dato_tidspunkt=? AND dato_tidspunkt=?";
+			PreparedStatement st = connect().prepareStatement(SQL);
+			st.setTimestamp(1, t1);
+			st.setTimestamp(2, t2);
+		} catch(SQLException e) {
+			System.out.println("db error during selection of logg" + e.getMessage());
+		}
+	}
 	
+
 }
