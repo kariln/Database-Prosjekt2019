@@ -61,8 +61,9 @@ public class Main3 {
 		System.out.print("[3] Knytt øvelse til apparat\n"); // Done
 		System.out.print("[4] Registrer treningsøkt\n"); // Done
 		System.out.print("[5] Gi meg de n siste treningsøktene\n"); // Done
-		System.out.print("[6] Lag øvelsesgruppe \n"); // TODO
-		System.out.print("[7] Hvis øvelser i en gruppe \n");
+		System.out.print("[6] Lag øvelsesgruppe \n"); // Done
+		System.out.print("[7] Hvis øvelser i en gruppe \n"); // TODO
+		System.out.print("[8] Returner total treningstid \n"); // TODO
 		System.out.print("\n");
 		
 		
@@ -86,6 +87,9 @@ public class Main3 {
 		case 6: // Lag øvelsesgruppe
 			lagØvelsesgruppe();
 			break;
+		case 7: // Hvis øvelse i en gruppe.
+			hvisØvelseIGrupper();
+		case 8: //
 		default:
 			System.out.print("Ugyldig valg.");
 			break;
@@ -186,6 +190,13 @@ public class Main3 {
 		String beskrivelse = scanString();
 		ØvelseController ov = new ØvelseController();
 		ov.addØvelsesgruppe(navn, beskrivelse);
+		
+	}
+	public static void hvisØvelserIGruppe() {
+		System.out.print("Skriv inn id-en til gruppen du vil vise øvelser fra: \n");
+		int n = scanInt();
+		
+		
 		
 	}
 
