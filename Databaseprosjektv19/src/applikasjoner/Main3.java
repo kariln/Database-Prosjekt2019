@@ -62,9 +62,9 @@ public class Main3 {
 		System.out.print("[4] Registrer treningsøkt\n"); // Done
 		System.out.print("[5] Gi meg de n siste treningsøktene\n"); // Done
 		System.out.print("[6] Lag øvelsesgruppe \n"); // Done
-		System.out.print("[7] Hvis øvelser i en gruppe \n"); // Done
-		System.out.print("[8] Hvis total treningstid innenfor et intervall \n"); // Done
-		System.out.print("[9] Hvis resultat for hver enkelt øvelse \n");
+		System.out.print("[7] Vis øvelser i en gruppe \n"); // Done
+		System.out.print("[8] Vis total treningstid innenfor et intervall \n"); // Done
+		System.out.print("[9] Vis resultat for hver enkelt øvelse \n");
 		System.out.print("\n");
 		
 		
