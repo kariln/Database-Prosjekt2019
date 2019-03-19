@@ -107,29 +107,29 @@ public class ØvelseController {
 		}
 	}	
 	
-//	public void findLoggInterval(String dato1, String dato2) {
-//		String s = new String();
-//		try {
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//			Date dt1 = new java.sql.Date(sdf.parse(dato1).getTime());
-//			Date dt2 = new java.sql.Date(sdf.parse(dato2).getTime());				
-//		    Timestamp t1 = new Timestamp(dt1.getTime());
-//		    Timestamp t2 = new Timestamp(dt2.getTime());
-//			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN dato_tidspunkt=? AND dato_tidspunkt=?";
-//			PreparedStatement st = connect().prepareStatement(SQL);
-//			st.setTimestamp(1, t1);
-//			st.setTimestamp(2, t2);
-//			st.execute();
-//			ResultSet rs = st.executeQuery();
-//			while (rs.next()) {
-//				s+= "Logger i intervall: " +øvelsesgruppe_id +'\n';
-//			}
-//			System.out.println(s);
-//			
-//		} catch(SQLException | ParseException e) {
-//			System.out.println("db error during selection of logg" + e.getMessage());
-//		}
-//	}
+	public void findLoggInterval(String dato1, String dato2) {
+		String s = new String();
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date dt1 = new java.sql.Date(sdf.parse(dato1).getTime());
+			Date dt2 = new java.sql.Date(sdf.parse(dato2).getTime());				
+		    Timestamp t1 = new Timestamp(dt1.getTime());
+		    Timestamp t2 = new Timestamp(dt2.getTime());
+			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN dato_tidspunkt=? AND dato_tidspunkt=?";
+			PreparedStatement st = connect().prepareStatement(SQL);
+			st.setTimestamp(1, t1);
+			st.setTimestamp(2, t2);
+			st.execute();
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				s+= "Logger i intervall: " +øvelsesgruppe_id +'\n';
+			}
+			System.out.println(s);
+			
+		} catch(SQLException | ParseException e) {
+			System.out.println("db error during selection of logg" + e.getMessage());
+		}
+	}
 	
 	public void findLoggIntervall(int N) {
 		String s = new String();

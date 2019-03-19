@@ -109,7 +109,7 @@ public class Treningsøktcontroller {
 			}
 		    Timestamp t1 = new Timestamp(dt1.getTime());
 		    Timestamp t2 = new Timestamp(dt2.getTime());
-			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN ? AND ?";
+			String SQL = " SELECT SUM(varighet) FROM logg WHERE dato_tidspunkt BETWEEN ? AND ?";
 			PreparedStatement st = connect.prepareStatement(SQL);
 			st.setTimestamp(1, t1);
 			st.setTimestamp(2, t2);
