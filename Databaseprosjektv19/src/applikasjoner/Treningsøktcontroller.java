@@ -72,7 +72,7 @@ public class Treningsøktcontroller {
 		Connection connect = connection.getConnection();
 		String output = new String();
 		try {
-			String SQL = "Select treningsøkt.økt_id, dato_tidspunkt, varighet, formål, opplevelse, diverse, form, prestasjon from treningsøkt join notat on treningsøkt.økt_id = notat.økt_id order by dato_tidspunkt desc LIMIT ?";
+			String SQL = "Select treningsøkt.økt_id, dato_tidspunkt, varighet, formål, opplevelse, diverse, form, prestasjon from treningsøkt left join notat on treningsøkt.økt_id = notat.økt_id order by dato_tidspunkt desc LIMIT ?";
 			PreparedStatement st = connect.prepareStatement(SQL);
 			st.setInt(1, n);
 			ResultSet rs = st.executeQuery();
@@ -109,13 +109,17 @@ public class Treningsøktcontroller {
 			}
 		    Timestamp t1 = new Timestamp(dt1.getTime());
 		    Timestamp t2 = new Timestamp(dt2.getTime());
+<<<<<<< HEAD
 			String SQL = " SELECT SUM(varighet) FROM logg WHERE dato_tidspunkt BETWEEN ? AND ?";
+=======
+			String SQL = " SELECT SUM(varighet) AS total_varighet FROM treningsøkt WHERE dato_tidspunkt BETWEEN ? AND ?";
+>>>>>>> 1758056fc68dad42c0e984995b35991fba3a42f3
 			PreparedStatement st = connect.prepareStatement(SQL);
 			st.setTimestamp(1, t1);
 			st.setTimestamp(2, t2);
 			ResultSet rs = st.executeQuery();
 			if (rs.next()){
-				System.out.println("Antall minutter trent: " + rs.getInt(1));
+				System.out.println("Antall minutter trent: " + rs.getInt("total_varighet"));
 			} else {
 				System.out.println("Ingen treningsøkter registrert i perioden");
 				}

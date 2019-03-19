@@ -61,8 +61,10 @@ public class Main3 {
 		System.out.print("[3] Knytt øvelse til apparat\n"); // Done
 		System.out.print("[4] Registrer treningsøkt\n"); // Done
 		System.out.print("[5] Gi meg de n siste treningsøktene\n"); // Done
-		System.out.print("[6] Lag øvelsesgruppe \n"); // TODO
-		System.out.print("[7] Hvis øvelser i en gruppe \n");
+		System.out.print("[6] Lag øvelsesgruppe \n"); // Done
+		System.out.print("[7] Hvis øvelser i en gruppe \n"); // Done
+		System.out.print("[8] Hvis total treningstid innenfor et intervall \n"); // Done
+		System.out.print("[9] Hvis resultat for hver enkelt øvelse \n");
 		System.out.print("\n");
 		
 		
@@ -86,6 +88,16 @@ public class Main3 {
 		case 6: // Lag øvelsesgruppe
 			lagØvelsesgruppe();
 			break;
+		case 7: // Hvis øvelse i en gruppe
+			hvisØvelserIGrupper();
+			break;
+		case 8: // Hvis total treningstid innenfor et intervall
+			hvisTotalTid();
+			break;
+		case 9:
+			hvisResultatForØvelse();
+			break;
+			
 		default:
 			System.out.print("Ugyldig valg.");
 			break;
@@ -188,44 +200,35 @@ public class Main3 {
 		ov.addØvelsesgruppe(navn, beskrivelse);
 		
 	}
-
+	public static void hvisØvelserIGrupper() {
+		ØvelseController app = new ØvelseController();
+		app.printgruppeList();
+		System.out.print("Skriv inn id-en til gruppen du vil vise øvelser fra: \n");
+		int n = scanInt();
+		app.getØvelserGruppe(n);
 		
-////		Apparat app1 = new Apparat(1);
-//		ØvelseController app1 = new ØvelseController();
-////		app1.printList();
-//		app1.addØvelseTilGruppe(2, 1013);
-//		app1.getØvelse(1).knyttØvelseTilApparat(1);
+	}
+	public static void hvisTotalTid() {
 		
+		Treningsøktcontroller tre = new Treningsøktcontroller();
+		System.out.print("Oppgi fra dato på formatet 'yyyy-MM-dd HH:mm:ss' \n");
+		String fra = scanString();
+		System.out.print("Oppgi til dato på formatet 'yyyy-MM-dd HH:mm:ss' \n");
+		String til = scanString();
 		
-		//app1.listØvelser(connect);
-//		System.out.println("ID: " + app1.getØvelseId() +" Navn: "+ app1.getNavn() + " Beskrivelse: " + app1.getBeskrivelse() + " Fastmontert? " + app1.getFastmontert());
-
-//
-//	
-//		System.out.println("test av objektene mine");
-//		System.out.println(app1.getØvelseId());
-//		System.out.println(app1.getNavn());
-//		System.out.println(app1.getBeskrivelse());
-//		System.out.println(app1.getFastmontert());
-//		
-//		
-//		
-//		Apparat app2 = new Apparat(2);
-//		app2.setNavn("Mølle");
-//		app2.setBrukerInstruks("LØP");
-//		System.out.println("Printe alle forekomster i tabellen");
-//		Apparat test = new Apparat(22);
-//		try {
-//			Statement statement = connect.createStatement();
-//			ResultSet rs = statement.executeQuery("select * from apparat");
-//			System.out.println("Dette funker");
-//			while (rs.next()) {
-//				System.out.println(rs.getString(1));
-//			}
-//			
-//		} catch(SQLException e){
-//			System.out.println(e.getMessage());
-//		} finally {
-//			connection.disconnect();
-//		}
+		tre.findTreningsmengde(fra, til);
+	}
+	public static void hvisResultatForØvelse() {
+		System.out.print("Resultat for øvelse: \n");
+		ØvelseController ov = new ØvelseController();
+		ov.printList();
+		System.out.print("Skriv inn øvelses-id");
+		int ovid = scanInt();
+		System.out.print("Oppgi fra dato på formatet 'yyyy-MM-dd HH:mm:ss' \n");
+		String fra = scanString();
+		System.out.print("Oppgi til dato på formatet 'yyyy-MM-dd HH:mm:ss' \n");
+		String til = scanString();
+		ov.findLoggInterval(ovid, fra, til);
+		
+	}
 }
