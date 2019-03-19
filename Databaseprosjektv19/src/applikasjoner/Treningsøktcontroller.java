@@ -103,12 +103,18 @@ public class Treningsøktcontroller {
 		    //long epoch2 = dt2.getTime();
 		    Timestamp t1 = new Timestamp(dt1.getTime());
 		    Timestamp t2 = new Timestamp(dt2.getTime());
-			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN dato_tidspunkt=? AND dato_tidspunkt=?";
+			String SQL = " SELECT * FROM logg WHERE dato_tidspunkt BETWEEN ? AND ?";
 			PreparedStatement st = connect.prepareStatement(SQL);
 			st.setTimestamp(1, t1);
 			st.setTimestamp(2, t2);
-		} catch(SQLException e) {
-			System.out.println("db error during selection of logg" + e.getMessage());
+			ResultSet rs = st.executeQuery();
+			if (rs.next()){
+				System.out.println("Antall minutter trent: " + rs.getInt(1));
+			} else {
+				System.out.println("Ingen treningsøkter registrert i perioden");
+				}
+			} catch(SQLException e) {
+			System.out.println("db error during selection of logg: " + e.getMessage());
 		}
 	}
 	
