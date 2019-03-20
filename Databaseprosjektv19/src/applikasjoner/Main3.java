@@ -44,8 +44,8 @@ public class Main3 {
 	
 	public static void main(String[] args) {
 		
-		System.out.print("hei2\n");
-		System.out.print("Velkommet til \nTrenigsdagbok\n");
+		System.out.print("hei\n");
+		System.out.print("Velkommen til din \nTrenigsdagbok\n");
 		
 //		System.out.print(scanString());
 		boolean avslutt = false;
