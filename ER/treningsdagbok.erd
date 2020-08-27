@@ -28,7 +28,7 @@
 <attributes/>
 </entity>
 <entity id="6" is_weak="false" name="Ikke fastmontert øvelse" x="812" y="534">
-<attributes/>
+<attributes/> 
 </entity>
 <entity id="7" is_weak="false" name="Øvelsesgruppe" x="972" y="403">
 <attributes>
