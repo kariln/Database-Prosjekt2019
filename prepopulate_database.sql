@@ -7,7 +7,7 @@ INSERT INTO apparat VALUES (4, 'beinpress','trøkk');
 INSERT INTO apparat VALUES (5, 'smithmaskin', 'trøkk');
 
 INSERT INTO treningsøkt VALUES (1, '2012-10-15 23:00:00', '17');
-INSERT INTO treningsøkt VALUES (2, '2012-10-15 22:59:59', '32');
+INSERT INTO treningsøkt VALUES (2, '2012-10-15 22:59:59', '32'); 
 INSERT INTO treningsøkt VALUES (3, '2012-10-15 12:29:00', '310');
 INSERT INTO treningsøkt VALUES (4, '2012-10-15 11:19:59', '130');
 
